@@ -25,7 +25,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../apache-tomcat-9.0.59/lib/jsp-api.jar!/" />
+          <root url="jar://$MODULE_DIR$/../apache-tomcat-9.0.62/lib/jsp-api.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -34,7 +34,16 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../apache-tomcat-9.0.59/lib/mysql-connector-java-8.0.27.jar!/" />
+          <root url="jar://$MODULE_DIR$/../apache-tomcat-9.0.62/lib/mysql-connector-java-8.0.27.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../apache-tomcat-9.0.62/lib/servlet-api.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
