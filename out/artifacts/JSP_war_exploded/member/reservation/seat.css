@@ -1,0 +1,23 @@
+.btn_seat button{
+    width: 20px;
+    height: 20px;
+}
+.case button{
+    width: 20px;
+    height: 20px;
+}
+/*.btn_seat  button:hover,*/
+/*.btn_seat button.actives*/
+/*{*/
+/*    background: #287bff;*/
+/*}*/
+
+.seatSelect{
+    background-color: #287bff;
+}
+
+
+.btn_seat button.actives
+{
+    background-color: red;
+}

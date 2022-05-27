@@ -1,0 +1,29 @@
+.nav{
+    width: 20%;
+    height: 100%;
+    float: left;
+}
+.main{
+    width: 80%;
+    float: right;
+}
+.header{
+    width: 100%;
+    padding-bottom: 5%;
+}
+.contents{
+    height: 100%;
+    width: 100%;
+    position: relative;
+
+}
+.details{
+    height: 90%;
+    width: 90%;
+    top: 5%;
+    left: 5%;
+    position: absolute;
+    background-color: white;
+    text-align: center;
+    vertical-align: middle;
+}
