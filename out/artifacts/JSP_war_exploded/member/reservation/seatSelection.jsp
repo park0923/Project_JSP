@@ -3,7 +3,10 @@
 <%@ page import="mysql.ReservationDao" %>
 <%@ page import="beans.ReservationDto" %>
 <%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %><%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.Calendar" %>
+<%@ page import="mysql.ScheduleDao" %>
+<%@ page import="java.sql.ResultSet" %><%--
   Created by IntelliJ IDEA.
   User: wndgk
   Date: 2022-05-18
@@ -28,19 +31,55 @@
 </script>
 <%
     }
+
+    Calendar calendar = Calendar.getInstance();
+    SimpleDateFormat sDate = new SimpleDateFormat("yyyy-MM-dd");
+    calendar.setTime(sDate.parse(request.getParameter("date")));
+    int week = calendar.get(Calendar.DAY_OF_WEEK);
+    String[] startArr = request.getParameter("startTime").split(":");
+    String[] endArr = request.getParameter("endTime").split(":");
+
+    ScheduleDao scheduleDao = ScheduleDao.getInstance();
+    int cnt = scheduleDao.scheduleCheck(request.getParameter("lectureRoom"), week, Integer.parseInt(startArr[0]), Integer.parseInt(endArr[0]));
+
+    if(cnt != 0){
+%>
+<script>
+    alert("이 시간은 수업중입니다.");
+    location.href = "../reservation.jsp";
+</script>
+<%
+    }
     String seatArr = "";
     String roomNum = "자동 배정";
+    ReservationDao dao = ReservationDao.getInstance();
+    List<ReservationDto> selectedSeat;
     if(request.getParameter("lectureRoom") != null){
-        ReservationDao dao = ReservationDao.getInstance();
-        String[] startArr = request.getParameter("startTime").split(":");
-        String[] endArr = request.getParameter("endTime").split(":");
-        List<ReservationDto> selectedSeat = dao.selectTime(request.getParameter("lectureRoom"),request.getParameter("date"), Integer.parseInt(startArr[0]), Integer.parseInt(endArr[0]));
-        for(int i=0; i<selectedSeat.size(); i++) {
-            seatArr += selectedSeat.get(i).getSeat() + " ";
-        }
+        dao = ReservationDao.getInstance();
+         selectedSeat = dao.selectTime(request.getParameter("lectureRoom"),request.getParameter("date"), Integer.parseInt(startArr[0]), Integer.parseInt(endArr[0]));
         roomNum = request.getParameter("lectureRoom");
+    }else{
+        selectedSeat = dao.selectTime("915",request.getParameter("date"), Integer.parseInt(startArr[0]), Integer.parseInt(endArr[0]));
+        System.out.println(selectedSeat.size());
+        roomNum = "915";
+        if(selectedSeat.size() >= 25){
+            selectedSeat = dao.selectTime("916",request.getParameter("date"), Integer.parseInt(startArr[0]), Integer.parseInt(endArr[0]));
+            roomNum = "916";
+            if(selectedSeat.size() >= 25){
+                selectedSeat = dao.selectTime("918",request.getParameter("date"), Integer.parseInt(startArr[0]), Integer.parseInt(endArr[0]));
+                roomNum = "918";
+                if(selectedSeat.size() >= 25){
+                    roomNum = "911";
+                    selectedSeat = dao.selectTime("911",request.getParameter("date"), Integer.parseInt(startArr[0]), Integer.parseInt(endArr[0]));
+                }
+            }
+        }
+    }
+    for(int i=0; i<selectedSeat.size(); i++) {
+        seatArr += selectedSeat.get(i).getSeat() + " ";
     }
 %>
+
 <div class="container">
     <div class="nav">
         <%@ include file="../../navigation.jsp" %>

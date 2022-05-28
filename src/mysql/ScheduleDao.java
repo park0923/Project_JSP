@@ -3,7 +3,7 @@ package mysql;
 import beans.ReservationDto;
 import beans.ScheduleDto;
 
-import java.time.LocalDateTime;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -136,33 +136,47 @@ public class ScheduleDao {
         return null;
     }
 
-//    public List<ScheduleDto> selectSchedule(String sTime, String eTime, String room){
-//        Connection conn = null;
-//        PreparedStatement pstmt = null;
-//        String query = "SELECT schedule_name, schedule_week From schedule WHERE schedule_class_stime=? AND schedule_class_eTime=? AND schedule_lectureroom_num=? ORDER BY schedule_week";
-//        ResultSet rs = null;
-//        ArrayList<ScheduleDto> list = new ArrayList<>();
-//        try {
-//            conn = DatabaseUtil.getConnection();
-//            if (conn == null) return null;
-//            pstmt = conn.prepareStatement(query);
-//            pstmt.setString(1, sTime);
-//            pstmt.setString(2, eTime);
-//            pstmt.setString(3, room);
-//
-//            rs = pstmt.executeQuery();
-//            while(rs.next()){
-//                ScheduleDto dto = new ScheduleDto.Builder()
-//                        .schedule_name(rs.getString("schedule_name"))
-//                        .schedule_week(rs.getInt("schedule_week"))
-//                        .build();
-//                list.add(dto);
-//
-//            }
-//            return list;
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
+    public int scheduleCheck(String room, int week, int start, int end){
+        int rt = 0;
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        String query = "SELECT COUNT(*) cnt FROM schedule WHERE schedule_week=?" +
+                "                AND schedule_lectureroom_num=?" +
+                "                AND ((? >= CONVERT(SUBSTR(schedule_class_Stime,1, INSTR(schedule_class_stime,':')-1), signed integer) AND ? < CONVERT(SUBSTR(schedule_class_Stime,1, INSTR(schedule_class_stime,':')-1), signed integer))" +
+                "                OR (? >= CONVERT(SUBSTR(schedule_class_Stime,1, INSTR(schedule_class_stime,':')-1), signed integer) AND ? < CONVERT(SUBSTR(schedule_class_Stime,1, INSTR(schedule_class_stime,':')-1), signed integer))" +
+                "                OR (? <= CONVERT(SUBSTR(schedule_class_Stime,1, INSTR(schedule_class_stime,':')-1), signed integer) AND ? >= CONVERT(SUBSTR(schedule_class_Stime,1, INSTR(schedule_class_stime,':')-1), signed integer)))";
+        ResultSet rs = null;
+        try {
+            conn = DatabaseUtil.getConnection();
+            if (conn == null) return rt;
+            pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, week);
+            pstmt.setString(2, room);
+            pstmt.setInt(3, start);
+            pstmt.setInt(4, start);
+            pstmt.setInt(5, end);
+            pstmt.setInt(6, end);
+            pstmt.setInt(7, start);
+            pstmt.setInt(8, end);
+            rs = pstmt.executeQuery();
+            while(rs.next()){
+                rt = rs.getInt("cnt");
+            }
+
+
+            return rt;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return rt;
+    }
+
 }

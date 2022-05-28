@@ -30,7 +30,7 @@
                 if(i == seatArray.length - 1){
 %>
                     <script>
-                        alert("예약에 성공 했습니다.");
+                        alert("예약 성공 -> 강의실 규칙 및 공지사항 등 주의사항 알리기");
                         location.href = '../mainForm.jsp';
                     </script>
 <%
@@ -49,7 +49,7 @@
                 if(i == seatArray.length - 1){
 %>
                     <script>
-                        alert("예약에 성공 했습니다.");
+                        alert("예약 성공 -> 강의실 규칙 및 공지사항 등 주의사항 알리기");
                         location.href = '../mainForm.jsp';
                     </script>
 <%

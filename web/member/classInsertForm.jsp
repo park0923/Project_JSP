@@ -61,14 +61,12 @@
                     <input type="text" name="className">
                     요일 선택
                     <select name="week">
-                        <option value="0">시작 시간 선택</option>
-                        <option>월</option>
-                        <option>화</option>
-                        <option>수</option>
-                        <option>목</option>
-                        <option>금</option>
-                        <option>토</option>
-                        <option>일</option>
+                        <option >요일 선택</option>
+                        <option value="2">월</option>
+                        <option value="3">화</option>
+                        <option value="4">수</option>
+                        <option value="5">목</option>
+                        <option value="6">금</option>
                     </select>
 
                     <input type="submit" value="예약">
