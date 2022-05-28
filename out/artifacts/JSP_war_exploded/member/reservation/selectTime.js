@@ -53,17 +53,17 @@ function categoryChange(e) {
     else if(e.value == "17:00") {
         var d = endTime_9;
         room.disabled = true;
-        alert("강의실을 선택할 수 없습니다.");
+        alert("강의실을 선택할 수 없고 자동배정 될 예정입니다.");
     }
     else if(e.value == "18:00") {
         var d = endTime_10;
         room.disabled = true;
-        alert("강의실을 선택할 수 없습니다.");
+        alert("강의실을 선택할 수 없고 자동배정 될 예정입니다.");
     }
     else if(e.value == "19:00") {
         var d = endTime_11;
         room.disabled = true;
-        alert("강의실을 선택할 수 없습니다.");
+        alert("강의실을 선택할 수 없고 자동배정 될 예정입니다.");
     }
 
     target.options.length = 0;

@@ -1,5 +1,6 @@
 <%@ page import="java.util.Date" %>
-<%@ page import="java.text.SimpleDateFormat" %><%--
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Calendar" %><%--
   Created by IntelliJ IDEA.
   User: wndgk
   Date: 2022-05-18
@@ -146,7 +147,7 @@
         <form name="reservation_form" method="post" action="reservation/seatSelection.jsp">
           <input type="date" id="start" name="date"
                  value=<%= strDate%>
-                         min="2022-05-13" max="2030-12-31" style="margin-left: 10px">
+                         min=<%=strDate%> max="2030-12-31" style="margin-left: 10px">
           <Br>
 
           <span class="rs">

@@ -45,7 +45,7 @@
     for(int i=0; i<5; i++){
         for(int j=0; j<9; j++){
             for(int k=0; k<scheduleDto1.size(); k++){
-                if(scheduleTime[j].equals(scheduleDto1.get(k).getSchedule_class_Stime()) && i==scheduleDto1.get(k).getSchedule_week()){
+                if(scheduleTime[j].equals(scheduleDto1.get(k).getSchedule_class_Stime()) && (i+2)==scheduleDto1.get(k).getSchedule_week()){
                     scheduleName1[j][i]=scheduleDto1.get(k).getSchedule_name();
                 }
             }
@@ -55,7 +55,7 @@
     for(int i=0; i<5; i++){
         for(int j=0; j<9; j++){
             for(int k=0; k<scheduleDto2.size(); k++){
-                if(scheduleTime[j].equals(scheduleDto2.get(k).getSchedule_class_Stime()) && i==scheduleDto2.get(k).getSchedule_week()){
+                if(scheduleTime[j].equals(scheduleDto2.get(k).getSchedule_class_Stime()) && (i+2)==scheduleDto2.get(k).getSchedule_week()){
                     scheduleName2[j][i]=scheduleDto2.get(k).getSchedule_name();
                 }
             }
@@ -65,7 +65,7 @@
     for(int i=0; i<5; i++){
         for(int j=0; j<9; j++){
             for(int k=0; k<scheduleDto3.size(); k++){
-                if(scheduleTime[j].equals(scheduleDto3.get(k).getSchedule_class_Stime()) && i==scheduleDto3.get(k).getSchedule_week()){
+                if(scheduleTime[j].equals(scheduleDto3.get(k).getSchedule_class_Stime()) && (i+2)==scheduleDto3.get(k).getSchedule_week()){
                     scheduleName3[j][i]=scheduleDto3.get(k).getSchedule_name();
                 }
             }
@@ -75,7 +75,7 @@
     for(int i=0; i<5; i++){
         for(int j=0; j<9; j++){
             for(int k=0; k<scheduleDto4.size(); k++){
-                if(scheduleTime[j].equals(scheduleDto4.get(k).getSchedule_class_Stime()) && i==scheduleDto4.get(k).getSchedule_week()){
+                if(scheduleTime[j].equals(scheduleDto4.get(k).getSchedule_class_Stime()) && (i+2)==scheduleDto4.get(k).getSchedule_week()){
                     scheduleName4[j][i]=scheduleDto4.get(k).getSchedule_name();
                 }
             }

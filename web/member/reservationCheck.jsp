@@ -151,23 +151,6 @@
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 </body>
 <script>
-    let toggle = document.querySelector('.toggle');
-    let navigation = document.querySelector('.navigation');
-    let main = document.querySelector('.main');
-
-    toggle.onclick = function(){
-        navigation.classList.toggle('active')
-        main.classList.toggle('active')
-    }
-
-    let list = document.querySelectorAll('.list');
-    function activeLink(){
-        list.forEach((item) =>
-            item.classList.remove('actives'));
-        this.classList.add('actives');
-    }
-    list.forEach((item) =>
-        item.addEventListener('click', activeLink));
 
     function sendPost(url, params) {
         var form = document.createElement('form');
