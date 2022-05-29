@@ -1,11 +1,14 @@
 package mysql;
 
+import beans.ReservationDto;
 import beans.UserDto;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDao {
     public static int USER_EXISTENT = 1;
@@ -349,5 +352,76 @@ public class UserDao {
             }
         }
         return rt;
+    }
+
+    public int getCount(){
+        int count = 0;
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String sql = "SELECT count(*) FROM member";
+        try {
+            conn = DatabaseUtil.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+            if(rs.next()){
+                count = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return count; // 총 레코드 수 리턴
+    }
+
+    public List<UserDto> getUserPaging(int startRow, int endRow){
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        String query = "";
+        ResultSet rs = null;
+        ArrayList<UserDto> list = new ArrayList<>();
+        try {
+            conn = DatabaseUtil.getConnection();
+            if (conn == null) return null;
+
+            query = "SELECT * FROM member LIMIT ?, ?";
+            pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, startRow);
+            pstmt.setInt(2, endRow);
+            rs = pstmt.executeQuery();
+
+            while(rs.next()){
+                UserDto dto = new UserDto.Builder()
+                        .id(rs.getString("member_id"))
+                        .pw(rs.getString("member_pw"))
+                        .name(rs.getString("member_name"))
+                        .phone(rs.getString("member_phone"))
+                        .email(rs.getString("member_email"))
+                        .position(rs.getString("member_position"))
+                        .state(rs.getString("member_state"))
+                        .warning(rs.getString("member_warning"))
+                        .build();
+                list.add(dto);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 }

@@ -187,8 +187,9 @@
           <div class="selectPerson">
           <br>
           <h3>인원:</h3>
-          <input type="number" name="person" min="1" max="10" step="1" value="1">
-            <br>
+          <input type="number" id="person" name="person" min="1" max="1" step="1" value="1">
+          <br>
+            <h3>조별학습 <input type="checkbox" name="team"></h3>
           <input type="button" value="다음" onclick="confirmTime()" class="selectbtn" style="margin-top: 30px;">
           </div>
           </span>
@@ -200,6 +201,7 @@
 </div>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
   function confirmTime(){
     var room = document.getElementById("Room");
@@ -213,6 +215,14 @@
     }
     document.reservation_form.submit();
   }
+
+  $("input:checkbox").on('click', function (){
+    if($(this).prop('checked')){
+      $('#person').prop('max',10);
+    }else {
+      $('#person').prop('max',1);
+    }
+  });
 </script>
 </body>
 </html>

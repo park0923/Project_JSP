@@ -7,7 +7,6 @@
 --%>
 <%@ page import="beans.ReservationDto" %>
 <%@ page import="mysql.ReservationDao" %>
-<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String[] timeArray = request.getParameter("startTime").split(" ~ ");

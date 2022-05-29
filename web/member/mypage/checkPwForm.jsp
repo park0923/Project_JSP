@@ -36,13 +36,13 @@
             </div>
             <div class="contents">
                 <div class="details">
-                    <form action="memberUpdateForm.jsp" method="post" name="modify_form">
+                    <form action="memberUpdateForm.jsp" method="post" name="check_form">
                         <table>
                             <td>비밀번호 입력하세요</td>
                             <td><input type="password" name="pw"></td>
                         </table>
                         <div class="c">
-                            <input type="button" value="확인" onclick="confirmModify()">
+                            <input type="button" value="확인" onclick="confirmPassword()">
                             <input type="button" value="취소" onclick="location.href='../mainForm.jsp'">
                         </div>
                     </form>

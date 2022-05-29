@@ -14,6 +14,8 @@ public class ReservationDao {
     public static int SELECT_SUCCESS = 2;
     public static int UPDATE_SUCCESS = 3;
     public static int UPDATE_FAIL = 4;
+    public static int DELETE_SUCCESS = 5;
+    public static int DELETE_FAIL = 6;
     private static ReservationDao instance = new ReservationDao();
 
     public static ReservationDao getInstance() { return instance; }
@@ -165,12 +167,12 @@ public class ReservationDao {
             conn = DatabaseUtil.getConnection();
             if (conn == null) return null;
             if(id.equals("")){
-                query = "SELECT * FROM reservation ORDER BY reservation_date DESC LIMIT ?, ?";
+                query = "SELECT * FROM reservation ORDER BY reservation_date DESC, reservation_state LIMIT ?, ?";
                 pstmt = conn.prepareStatement(query);
                 pstmt.setInt(1, startRow);
                 pstmt.setInt(2, endRow);
             }else {
-                query = "SELECT * FROM reservation WHERE reservation_id=? ORDER BY reservation_date DESC LIMIT ?, ?";
+                query = "SELECT * FROM reservation WHERE reservation_id=? ORDER BY reservation_date DESC, reservation_state LIMIT ?, ?";
                 pstmt = conn.prepareStatement(query);
                 pstmt.setString(1, id);
                 pstmt.setInt(2, startRow);
@@ -232,6 +234,34 @@ public class ReservationDao {
         return count; // 총 레코드 수 리턴
     }
 
+    public int getIdCount(String id){
+        int count = 0;
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String sql = "SELECT count(*) FROM reservation WHERE reservation_id=?";
+        try {
+            conn = DatabaseUtil.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, id);
+            rs = pstmt.executeQuery();
+            if(rs.next()){
+                count = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return count; // 총 레코드 수 리턴
+    }
+
     public int updateState(ReservationDto reservationDto){
         int rt = 0;
         Connection conn = null;
@@ -255,6 +285,74 @@ public class ReservationDao {
             rt = UPDATE_SUCCESS;
         } catch (SQLException e) {
             rt = UPDATE_FAIL;
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return rt;
+    }
+
+    public String getLongTimeName(String date){
+        String name = "";
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String sql = "SELECT member_name FROM member JOIN " +
+                "(SELECT MAX(CONVERT(SUBSTR(reservation_endTime,1,2), signed integer)), reservation_id, reservation_endTime FROM reservation " +
+                "WHERE reservation_state='승인' AND reservation_date=?) r " +
+                "WHERE member_id=r.reservation_id;";
+        try {
+            conn = DatabaseUtil.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, date);
+            rs = pstmt.executeQuery();
+            if(rs.next()){
+                name = rs.getString("member_name");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return name;
+    }
+
+    public int deleteReservation(String id, String date, String room, String seat, String sTime, String eTime){
+        int rt = 0;
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        String query = "DELETE FROM reservation WHERE reservation_id = ? AND reservation_lectureroom_num=? " +
+                "AND reservation_startTime = ? AND reservation_endTime = ? AND reservation_seat = ? AND reservation_date = ?";
+
+        try {
+            conn = DatabaseUtil.getConnection();
+
+            if (conn == null) return rt;
+            pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, id);
+            pstmt.setString(2, room);
+            pstmt.setString(3, sTime);
+            pstmt.setString(4, eTime);
+            pstmt.setString(5, seat);
+            pstmt.setString(6, date);
+            pstmt.executeUpdate();
+            rt = DELETE_SUCCESS;
+        } catch (SQLException e) {
+            rt = DELETE_FAIL;
             e.printStackTrace();
         } finally {
             try {

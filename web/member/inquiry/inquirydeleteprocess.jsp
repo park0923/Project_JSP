@@ -10,7 +10,6 @@
 
 <%
     String id = request.getParameter("id");
-    System.out.println(id);
     BoardDao bdao = BoardDao.getInstance();
 
     if(bdao.deleteBoard(id) == BoardDao.NOTICE_DELETE_SUCCESS){

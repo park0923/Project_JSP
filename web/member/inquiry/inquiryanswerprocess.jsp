@@ -14,8 +14,6 @@
 <%
     String id = request.getParameter("id");
     String answer = request.getParameter("answer");
-    System.out.println(id);
-    System.out.println(answer);
     BoardDao bdao = BoardDao.getInstance();
 
     if(bdao.updateanswer(id, answer) == BoardDao.ANSWER_UPDATE_SUCCESS){

@@ -133,7 +133,7 @@
                             <textarea typeof="text" name="inquiry" placeholder="내용을 입력하세요"></textarea>
                         </div>
                         <div class="inputBox">
-                            <input type="submit" value="작성">
+                            <button type="button" onclick="confirmModify()">작성</button>
                             <button type="button" onclick="location.href='inquiryList.jsp'">취소</button>
                         </div>
                     </form>
@@ -144,5 +144,20 @@
 </div>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script>
+    function confirmModify() {
+        if(document.inquiry_form.title.value === ""){
+            alert("제목을 입력하세요.");
+            document.inquiry_form.title.focus();
+            return;
+        }
+        if(document.inquiry_form.inquiry.value === ""){
+            alert("내용을 입력하세요.");
+            document.inquiry_form.inquiry.focus();
+            return;
+        }
+        document.inquiry_form.submit();
+    }
+</script>
 </body>
 </html>

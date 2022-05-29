@@ -17,7 +17,7 @@
 <html>
 <head>
     <title>강의실 예약</title>
-    <link rel="stylesheet" type="text/css" href="../main.css">
+    <link rel="stylesheet" type="text/css" href="/member/reservation/reservation.css">
     <link rel="stylesheet" type="text/css" href="/member/reservation/seat.css">
 </head>
 <script type="text/javascript" src="reservation/selectTime.js"></script>
@@ -49,79 +49,8 @@
 </script>
 <%
     }
+%>
 
-    ReservationDao dao = ReservationDao.getInstance();
-    String seatArr = "";
-    String roomNum = "자동 배정";
-    String teamCheck = request.getParameter("team");
-    boolean tf;
-    if(teamCheck == null){
-        tf = false;
-    }else {
-        tf = true;
-    }
-    List<ReservationDto> selectedSeat;
-    if(request.getParameter("lectureRoom") != null){
-        dao = ReservationDao.getInstance();
-        selectedSeat = dao.selectTime(request.getParameter("lectureRoom"),request.getParameter("date"), Integer.parseInt(startArr[0]), Integer.parseInt(endArr[0]));
-        roomNum = request.getParameter("lectureRoom");
-    }else{
-        selectedSeat = dao.selectTime("915",request.getParameter("date"), Integer.parseInt(startArr[0]), Integer.parseInt(endArr[0]));
-        roomNum = "915";
-        if(selectedSeat.size() >= 25){
-            selectedSeat = dao.selectTime("916",request.getParameter("date"), Integer.parseInt(startArr[0]), Integer.parseInt(endArr[0]));
-            roomNum = "916";
-            if(selectedSeat.size() >= 25){
-                selectedSeat = dao.selectTime("918",request.getParameter("date"), Integer.parseInt(startArr[0]), Integer.parseInt(endArr[0]));
-                roomNum = "918";
-                if(selectedSeat.size() >= 25){
-                    roomNum = "911";
-                    selectedSeat = dao.selectTime("911",request.getParameter("date"), Integer.parseInt(startArr[0]), Integer.parseInt(endArr[0]));
-                }else if(selectedSeat.size() >= 20 && tf){
-%>
-                <script>
-                    var con = confirm("다음 강의실 쓰겠습니까?");
-                    if(con){
-                        <%
-                            selectedSeat = dao.selectTime("911",request.getParameter("date"), Integer.parseInt(startArr[0]), Integer.parseInt(endArr[0]));
-                            roomNum = "911";
-                        %>
-                    }
-                </script>
-<%
-                }
-            }else if(selectedSeat.size() >= 20 && tf){
-%>
-            <script>
-                var con = confirm("다음 강의실 쓰겠습니까?");
-                if(con){
-                    <%
-                        selectedSeat = dao.selectTime("918",request.getParameter("date"), Integer.parseInt(startArr[0]), Integer.parseInt(endArr[0]));
-                        roomNum = "918";
-                    %>
-                }
-            </script>
-<%
-            }
-        }else if(selectedSeat.size() >= 20 && tf){
-%>
-        <script>
-            var con = confirm("다음 강의실 쓰겠습니까?");
-            if(con){
-                <%
-                    selectedSeat = dao.selectTime("916",request.getParameter("date"), Integer.parseInt(startArr[0]), Integer.parseInt(endArr[0]));
-                    roomNum = "916";
-                %>
-            }
-        </script>
-<%
-        }
-    }
-
-    for(int i=0; i<selectedSeat.size(); i++) {
-        seatArr += selectedSeat.get(i).getSeat() + " ";
-    }
-%>
 <div class="container">
     <div class="nav">
         <%@ include file="../../navigation.jsp" %>
@@ -132,6 +61,51 @@
         </div>
         <div class="contents">
             <div class="details">
+<%
+                if(request.getParameter("team").equals("on")){
+%>
+                    <select name="test">
+                        <option value="0">강의실 선택</option>
+                        <option value="915">915</option>
+                        <option value="916">916</option>
+                        <option value="918">918</option>
+                        <option value="911">911</option>
+                    </select>
+<%
+                }
+                    String seatArr = "";
+                    String roomNum = "자동 배정";
+                    ReservationDao dao = ReservationDao.getInstance();
+                    List<ReservationDto> selectedSeat;
+                    List<ReservationDto> selectedSeat1;
+                    List<ReservationDto> selectedSeat2;
+                    List<ReservationDto> selectedSeat3;
+                    List<ReservationDto> selectedSeat4;
+                    if(request.getParameter("lectureRoom") != null){
+                        dao = ReservationDao.getInstance();
+                        selectedSeat = dao.selectTime(request.getParameter("lectureRoom"),request.getParameter("date"), Integer.parseInt(startArr[0]), Integer.parseInt(endArr[0]));
+                        roomNum = request.getParameter("lectureRoom");
+                    }else{
+                        selectedSeat = dao.selectTime("915",request.getParameter("date"), Integer.parseInt(startArr[0]), Integer.parseInt(endArr[0]));
+                        roomNum = "915";
+                        if(selectedSeat.size() >= 25){
+                            selectedSeat = dao.selectTime("916",request.getParameter("date"), Integer.parseInt(startArr[0]), Integer.parseInt(endArr[0]));
+                            roomNum = "916";
+                            if(selectedSeat.size() >= 25){
+                                selectedSeat = dao.selectTime("918",request.getParameter("date"), Integer.parseInt(startArr[0]), Integer.parseInt(endArr[0]));
+                                roomNum = "918";
+                                if(selectedSeat.size() >= 25){
+                                    roomNum = "911";
+                                    selectedSeat = dao.selectTime("911",request.getParameter("date"), Integer.parseInt(startArr[0]), Integer.parseInt(endArr[0]));
+                                }
+                            }
+                        }
+                    }
+
+                    for(int i=0; i<selectedSeat.size(); i++) {
+                        seatArr += selectedSeat.get(i).getSeat() + " ";
+                    }
+%>
                 <section id="view1">
                     <h1>칠판</h1>
                     <br>

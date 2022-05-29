@@ -11,6 +11,7 @@
 <%@ page import="mysql.UserDao" %>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.util.List" %>
 <jsp:useBean id="board" class="beans.BoardDto"/>
 <html>
 <head>
@@ -131,6 +132,44 @@
     </style>
 </head>
 <body>
+<%
+    BoardDao dao = BoardDao.getInstance();
+    List<BoardDto> boardDtoList = null;
+    String pageNum = request.getParameter("pageNum");
+    if(pageNum == null){
+        pageNum = "1";
+    }
+    int pageSize = 10;
+    int currentPage = Integer.parseInt(pageNum);
+    int Row = (currentPage - 1) * pageSize;
+    int count;
+    if(session.getAttribute("position").equals("admin")){
+        count = dao.getCount();
+        if(count > 0){
+            boardDtoList = dao.getInquiry(Row, pageSize, "");
+        }else {
+        %>
+            <script>
+                alert("예약이 없습니다.")
+                history.back();
+            </script>
+        <%
+        }
+    }else{
+        count = dao.getIdCount((String) session.getAttribute("id"));
+        if(count > 0){
+            boardDtoList = dao.getInquiry(Row, pageSize, (String) session.getAttribute("id"));
+            System.out.println(boardDtoList.get(0).getBoard_inquiry());
+    }else{
+        %>
+            <script>
+                alert("예약이 없습니다.")
+                history.back();
+            </script>
+        <%
+        }
+    }
+%>
 <div class="container">
     <div class="nav">
         <%@ include file="../../navigation.jsp" %>
@@ -163,95 +202,69 @@
                         </thead>
                         <tbody>
                         <%
-                            System.out.println(session.getAttribute("id"));
-                            UserDao udao = UserDao.getInstance();
-                            String studentid = (String) session.getAttribute("id");
-                            BoardDao dao = BoardDao.getInstance();
-                            ResultSet rs = dao.getBoard();
-                            ArrayList<BoardDto> uarr = dao.getBoardInquiry(studentid);
-                            ArrayList<BoardDto> narr = dao.getBoardNotice("notice");
-                            ArrayList<BoardDto> iarr = dao.getBoardNotice("inquiry");
-                            if (udao.getPosition((String)session.getAttribute("id")).equals("admin")){
-                                int num = 1;
-                                for (int i = 0; i < narr.size(); i++){
+                            for(int i=0; i<boardDtoList.size(); i++){
                         %>
                         <tr>
-                            <td><%=num%> </td>
+                            <td><%=i+1%></td>
                             <td>
-                                <a class="view" href="inquiryview.jsp?id=<%=narr.get(i).getBoard_index()%>"><%=narr.get(i).getBoard_title()%></a>
+                                <a class="view" href="inquiryview.jsp?id=<%=boardDtoList.get(i).getBoard_index()%>"><%=boardDtoList.get(i).getBoard_inquiry()%></a>
                             </td>
-                            <td><%=narr.get(i).getB0ard_studentID()%> </td>
-                            <td><%=narr.get(i).getCreate_date()%></td>
-                            <td>공지</td>
+                            <td><%=boardDtoList.get(i).getB0ard_studentID()%></td>
+                            <td><%=boardDtoList.get(i).getCreate_date()%></td>
+                            <td><%=boardDtoList.get(i).getBoard_classfication()%></td>
                             <td>
-                                <a href="/member/inquiry/inquiryupdate.jsp?id=<%=narr.get(i).getBoard_index()%>" class="btn_up">수정</a>
+                                <a href="/member/inquiry/inquiryupdate.jsp?id=<%=boardDtoList.get(i).getBoard_index()%>" class="btn_up">수정</a>
                             </td>
                             <td>
-                                <a href="/member/inquiry/inquirydeleteprocess.jsp?id=<%=narr.get(i).getBoard_index()%>" class="btn_del">삭제</a>
+                                <a href="/member/inquiry/inquirydeleteprocess.jsp?id=<%=boardDtoList.get(i).getBoard_index()%>" class="btn_del">삭제</a>
                             </td>
                         </tr>
                         <%
-                                num++;
                             }
-                            for(int j = 0; j < iarr.size(); j++){
                         %>
                         <tr>
-                            <td><%=num%> </td>
-                            <td>
-                                <a class="view" href="inquiryview.jsp?id=<%=iarr.get(j).getBoard_index()%>"><%=iarr.get(j).getBoard_title()%></a>
-                            </td>
-                            <td><%=iarr.get(j).getB0ard_studentID()%> </td>
-                            <td><%=iarr.get(j).getCreate_date()%></td>
-                            <td>문의</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <%
-                                num++;
-                            }
-                        }
-                        else{
-                            int num=1;
-                            for (int i = 0; i < narr.size(); i++){
-                        %>
-                        <tr>
-                            <td><%=num%> </td>
-                            <td>
-                                <a class="view" href="inquiryview.jsp?id=<%=narr.get(i).getBoard_index()%>"><%=narr.get(i).getBoard_title()%></a>
-                            </td>
-                            <td><%=narr.get(i).getB0ard_studentID()%> </td>
-                            <td><%=narr.get(i).getCreate_date()%></td>
-                            <td>공지</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <%
-                                num++;
-                            }
-                            for(int j = 0; j < uarr.size(); j++){
-                        %>
-                        <tr>
-                            <td><%=num%> </td>
-                            <td>
-                                <a class="view" href="inquiryview.jsp?id=<%=uarr.get(j).getBoard_index()%>">
-                                    <%=uarr.get(j).getBoard_title()%>
-                                </a>
-                            </td>
-                            <td><%=uarr.get(j).getB0ard_studentID()%> </td>
-                            <td><%=uarr.get(j).getCreate_date()%></td>
-                            <td>문의</td>
-                            <td>
-                                <a href="/member/inquiry/inquiryupdate.jsp?id=<%=uarr.get(j).getBoard_index()%>" class="btn_up">수정</a>
-                            </td>
-                            <td>
-                                <a href="/member/inquiry/inquirydeleteprocess.jsp?id=<%=uarr.get(j).getBoard_index()%>" class="btn_del">삭제</a>
+                            <td colspan="8" align="center">
+                                <%
+                                    if(count > 0){
+                                        // 총 페이지의 수
+                                        int pageCount = count / pageSize + (count%pageSize == 0 ? 0 : 1);
+                                        // 한 페이지에 보여줄 페이지 블럭(링크) 수
+                                        int pageBlock = 10;
+                                        // 한 페이지에 보여줄 시작 및 끝 번호(예 : 1, 2, 3 ~ 10 / 11, 12, 13 ~ 20)
+                                        int startPage = ((currentPage-1)/pageBlock)*pageBlock+1;
+                                        int endPage = startPage + pageBlock - 1;
+
+                                        // 마지막 페이지가 총 페이지 수 보다 크면 endPage를 pageCount로 할당
+                                        if(endPage > pageCount){
+                                            endPage = pageCount;
+                                        }
+
+                                        if(startPage > pageBlock){
+                                %>
+                                <a href="inquiryList.jsp?pageNum=<%=startPage - 10%>">[이전]</a>
+                                <%
+                                    }
+
+                                    for(int i=startPage; i <= endPage; i++){ // 페이지 블록 번호
+                                        if(i == currentPage){ // 현재 페이지에는 링크를 설정하지 않음
+                                %>
+                                <%=i %>
+                                <%
+                                }else{ // 현재 페이지가 아닌 경우 링크 설정
+                                %>
+                                <a href="inquiryList.jsp?pageNum=<%=i%>">[<%=i %>]</a>
+                                <%
+                                        }
+                                    } // for end
+                                    if(endPage < pageCount){ // 현재 블록의 마지막 페이지보다 페이지 전체 블록수가 클경우 다음 링크 생성
+                                %>
+                                <a href="inquiryList.jsp?pageNum=<%=startPage + 10 %>">[다음]</a>
+                                <%
+                                        }
+                                    }
+                                %>
                             </td>
                         </tr>
-                        <%
-                                    num++;
-                                }
-                            }
-                        %>
                         </tbody>
                     </table>
                 </div>

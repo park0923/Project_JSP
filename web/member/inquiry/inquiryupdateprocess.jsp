@@ -13,8 +13,7 @@
 <%
     String id = request.getParameter("id");
     String body = request.getParameter("inquiry");
-    System.out.println(id);
-    System.out.println(body);
+
     UserDao udao = UserDao.getInstance();
     UserDto udto = udao.getUser((String) session.getAttribute("id"));
     BoardDao bdao = BoardDao.getInstance();

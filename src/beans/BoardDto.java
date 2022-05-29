@@ -23,6 +23,15 @@ public class BoardDto {
         this.create_date = create_date;
     }
 
+    public BoardDto(Integer board_index, String board_title, String board_inquiry, String b0ard_studentID, String board_classfication, Date create_date) {
+        this.board_index = board_index;
+        this.board_title = board_title;
+        this.board_inquiry = board_inquiry;
+        this.b0ard_studentID = b0ard_studentID;
+        this.board_classfication = board_classfication;
+        this.create_date = create_date;
+    }
+
     public Integer getBoard_index() {
         return board_index;
     }

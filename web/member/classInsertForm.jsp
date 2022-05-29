@@ -10,7 +10,6 @@
 <head>
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="main.css">
-    <script type="text/javascript" src="reservation/selectTime.js"></script>
 </head>
 <body>
 <div class="container">
@@ -23,7 +22,7 @@
         </div>
         <div class="contents">
             <div class="details">
-                <form action="classInsertProcess.jsp" method="post">
+                <form action="classInsertProcess.jsp" method="post" name="classInsertForm">
                     <div class="selectStartTime">
                         <h3>시간 선택 : </h3>
                         <select name="startTime" onchange="categoryChange(this)">
@@ -42,7 +41,7 @@
                         </select>
                     </div>
                     <div class="selectEndTime">
-                        <select name="endTime" id="changeTime" onchange="disabledRoom(this)">
+                        <select name="endTime" id="changeTime">
                             <option value="">종료 시간 선택</option>
                             <option>시작 시간을 선택하세요</option>
                         </select>
@@ -69,11 +68,88 @@
                         <option value="6">금</option>
                     </select>
 
-                    <input type="submit" value="예약">
+                    <input type="button" value="예약" onclick="confirmInsert()">
                 </form>
             </div>
         </div>
     </div>
 </div>
 </body>
+<script>
+    function categoryChange(e) {
+        var endTime_0 = ["시작 시간을 선택하세요"];
+        var endTime_1 = ["10:00"];
+        var endTime_2 = ["11:00"];
+        var endTime_3 = ["12:00"];
+        var endTime_4 = ["13:00"];
+        var endTime_5 = ["14:00"];
+        var endTime_6 = ["15:00"];
+        var endTime_7 = ["16:00"];
+        var endTime_8 = ["17:00"];
+        var target = document.getElementById("changeTime");
+        var room = document.getElementById("Room");
+
+        if(e.value == "0") {
+            var d = endTime_0;
+        }
+        else if(e.value == "9:00") {
+            var d = endTime_1;
+        }
+        else if(e.value == "10:00") {
+            var d = endTime_2;
+        }
+        else if(e.value == "11:00") {
+            var d = endTime_3;
+        }
+        else if(e.value == "12:00") {
+            var d = endTime_4;
+        }
+        else if(e.value == "13:00") {
+            var d = endTime_5;
+        }
+        else if(e.value == "14:00") {
+            var d = endTime_6;
+        }
+        else if(e.value == "15:00") {
+            var d = endTime_7;
+        }
+        else if(e.value == "16:00") {
+            var d = endTime_8;
+        }
+
+        target.options.length = 0;
+
+        for (x in d) {
+            var opt = document.createElement("option");
+            opt.name = d[x];
+            opt.innerHTML = d[x];
+            target.appendChild(opt);
+        }
+    }
+
+    function confirmInsert() {
+        if(document.classInsertForm.startTime.value === "" || document.classInsertForm.startTime.value === "0"){
+            alert("시간을 선택하세요.");
+            document.classInsertForm.startTime.focus();
+            return;
+        }
+        if(document.classInsertForm.lectureRoom.value === ""){
+            alert("강의실을 선택하세요.");
+            document.classInsertForm.lectureRoom.focus();
+            return;
+        }
+        if(document.classInsertForm.className.value === ""){
+            alert("강의 이름을 입력하세요.");
+            document.classInsertForm.className.focus();
+            return;
+        }
+        if(document.classInsertForm.week.value === ""){
+            alert("요일을 선택하세요.");
+            document.classInsertForm.week.focus();
+            return;
+        }
+
+        document.classInsertForm.submit();
+    }
+</script>
 </html>
