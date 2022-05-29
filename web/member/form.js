@@ -35,11 +35,39 @@ function confirmJoin() {
     document.join_form.submit();
 }
 
+function confirmPassword(){
+    if(document.check_form.pw.value === ""){
+        alert("비밀번호를 입력하세요.");
+        document.check_form.pw.focus();
+        return;
+    }
+    document.check_form.submit();
+}
 
 function confirmModify() {
+    if(document.modify_form.id.value === ""){
+        alert("아이디를 입력하세요.");
+        document.modify_form.id.focus();
+        return;
+    }
     if(document.modify_form.pw.value === ""){
         alert("비밀번호를 입력하세요.");
         document.modify_form.pw.focus();
+        return;
+    }
+    if(document.modify_form.name.value === ""){
+        alert("이름을 입력하세요.");
+        document.modify_form.id.focus();
+        return;
+    }
+    if(document.modify_form.phone.value === ""){
+        alert("전화번호를 입력하세요.");
+        document.modify_form.id.focus();
+        return;
+    }
+    if(document.modify_form.email.value === ""){
+        alert("이메일을 입력하세요.");
+        document.modify_form.id.focus();
         return;
     }
     document.modify_form.submit();
@@ -51,6 +79,7 @@ function confirmCheck(){
     }else{
         return;
     }
+    document.change_form.submit();
 }
 
 function changePassWordPopUp(){

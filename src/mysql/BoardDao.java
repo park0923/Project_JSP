@@ -1,6 +1,7 @@
 package mysql;
 
 import beans.BoardDto;
+import beans.ReservationDto;
 import beans.UserDto;
 
 import java.sql.Connection;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class BoardDao {
     public static int NOTICE_EXISTENT = 1;
@@ -306,5 +308,104 @@ public class BoardDao {
             }
         }
         return rt;
+    }
+
+    public int getCount(){
+        int count = 0;
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String sql = "SELECT count(*) FROM board";
+        try {
+            conn = DatabaseUtil.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+            if(rs.next()){
+                count = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return count; // 총 레코드 수 리턴
+    }
+
+    public int getIdCount(String id){
+        int count = 0;
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String sql = "SELECT count(*) FROM board WHERE board_studentID=?";
+        try {
+            conn = DatabaseUtil.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, id);
+            rs = pstmt.executeQuery();
+            if(rs.next()){
+                count = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return count; // 총 레코드 수 리턴
+    }
+
+    public List<BoardDto> getInquiry(int startRow, int endRow, String id){
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        String query = "";
+        ResultSet rs = null;
+        ArrayList<BoardDto> list = new ArrayList<>();
+        try {
+            conn = DatabaseUtil.getConnection();
+            if (conn == null) return null;
+            if(id.equals("")){
+                query = "SELECT * FROM board ORDER BY board_classification DESC, create_date DESC LIMIT ?, ?";
+                pstmt = conn.prepareStatement(query);
+                pstmt.setInt(1, startRow);
+                pstmt.setInt(2, endRow);
+            }else {
+                query = "SELECT * FROM board WHERE board_studentID = ? OR board_studentID = 'admin'" +
+                        "ORDER BY board_classification DESC, create_date DESC LIMIT ?, ?";
+                pstmt = conn.prepareStatement(query);
+                pstmt.setString(1, id);
+                pstmt.setInt(2, startRow);
+                pstmt.setInt(3, endRow);
+            }
+            rs = pstmt.executeQuery();
+
+            while(rs.next()){
+                BoardDto dto = new BoardDto(rs.getInt("board_index"), rs.getString("board_title"), rs.getString("board_inquiry"), rs.getString("board_studentID"),
+                        rs.getString("board_classification"), rs.getDate("create_date"));
+                list.add(dto);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 }

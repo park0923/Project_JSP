@@ -10,7 +10,6 @@
 <%
     UserDao dao = UserDao.getInstance();
     String id = (String) session.getAttribute("id");
-    System.out.println(id);
     int rt = dao.deleteId(id);
     if(rt == UserDao.USER_DELETE_SUCCESS){
 %>

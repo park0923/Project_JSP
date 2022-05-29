@@ -166,7 +166,7 @@
 <%--</style>--%>
 <head>
   <title>Join</title>
-  <script src="../form.js"></script>
+  <script src="../form.js?var=1"></script>
   <link rel="stylesheet" type="text/css" href="../main.css">
   <style>
     table {

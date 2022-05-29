@@ -5,7 +5,16 @@
   Time: 오후 12:57
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page import="java.util.Date" %>
+<%@ page import="mysql.ReservationDao" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    ReservationDao toDao = ReservationDao.getInstance();
+    Date toDate = new Date();
+    SimpleDateFormat today = new SimpleDateFormat("yyyy-MM-dd");
+    String toName = toDao.getLongTimeName(today.format(toDate));
+%>
 <html>
 <head>
     <title>Title</title>
@@ -57,18 +66,19 @@
     </style>
 </head>
 <body>
+
 <div class="topbar">
     <div class="toggle">
         <ion-icon name="menu-outline"></ion-icon>
     </div>
     <div class="user">
         <ul>
+            <li>오늘 정리하는 사람: <%=toName%></li>
             <li> <%=session.getAttribute("name")%></li>
             <li><a href="../home/logout.jsp">로그아웃</a></li>
         </ul>
     </div>
 </div>
-
 <script>
     let toggle = document.querySelector('.toggle');
     let navigation = document.querySelector('.navigation');

@@ -3,6 +3,7 @@
   <component name="WebContextManager">
     <option name="state">
       <map>
+        <entry key="file://$PROJECT_DIR$/web/member/classInsertForm.jsp" value="file://$PROJECT_DIR$/web/member" />
         <entry key="file://$PROJECT_DIR$/web/member/classroominquiry.jsp" value="file://$PROJECT_DIR$/web/member" />
       </map>
     </option>

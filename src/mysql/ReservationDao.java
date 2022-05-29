@@ -232,6 +232,34 @@ public class ReservationDao {
         return count; // 총 레코드 수 리턴
     }
 
+    public int getIdCount(String id){
+        int count = 0;
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String sql = "SELECT count(*) FROM reservation WHERE reservation_id=?";
+        try {
+            conn = DatabaseUtil.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, id);
+            rs = pstmt.executeQuery();
+            if(rs.next()){
+                count = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return count; // 총 레코드 수 리턴
+    }
+
     public int updateState(ReservationDto reservationDto){
         int rt = 0;
         Connection conn = null;
@@ -267,4 +295,36 @@ public class ReservationDao {
         }
         return rt;
     }
+
+    public String getLongTimeName(String date){
+        String name = "";
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String sql = "SELECT member_name FROM member JOIN " +
+                "(SELECT MAX(CONVERT(SUBSTR(reservation_endTime,1,2), signed integer)), reservation_id, reservation_endTime FROM reservation " +
+                "WHERE reservation_state='승인' AND reservation_date=?) r " +
+                "WHERE member_id=r.reservation_id;";
+        try {
+            conn = DatabaseUtil.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, date);
+            rs = pstmt.executeQuery();
+            if(rs.next()){
+                name = rs.getString("member_name");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return name;
+    }
+
 }

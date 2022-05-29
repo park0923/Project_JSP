@@ -84,5 +84,7 @@ function disabledRoom(e){
         room.disabled = true;
         room.value="강의실 선택";
         alert("강의실을 선택할 수 없습니다.");
+    }else{
+        room.disabled = false;
     }
 }
