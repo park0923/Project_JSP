@@ -14,6 +14,8 @@ public class ReservationDao {
     public static int SELECT_SUCCESS = 2;
     public static int UPDATE_SUCCESS = 3;
     public static int UPDATE_FAIL = 4;
+    public static int DELETE_SUCCESS = 5;
+    public static int DELETE_FAIL = 6;
     private static ReservationDao instance = new ReservationDao();
 
     public static ReservationDao getInstance() { return instance; }
@@ -165,12 +167,12 @@ public class ReservationDao {
             conn = DatabaseUtil.getConnection();
             if (conn == null) return null;
             if(id.equals("")){
-                query = "SELECT * FROM reservation ORDER BY reservation_date DESC LIMIT ?, ?";
+                query = "SELECT * FROM reservation ORDER BY reservation_date DESC, reservation_state LIMIT ?, ?";
                 pstmt = conn.prepareStatement(query);
                 pstmt.setInt(1, startRow);
                 pstmt.setInt(2, endRow);
             }else {
-                query = "SELECT * FROM reservation WHERE reservation_id=? ORDER BY reservation_date DESC LIMIT ?, ?";
+                query = "SELECT * FROM reservation WHERE reservation_id=? ORDER BY reservation_date DESC, reservation_state LIMIT ?, ?";
                 pstmt = conn.prepareStatement(query);
                 pstmt.setString(1, id);
                 pstmt.setInt(2, startRow);
@@ -327,4 +329,40 @@ public class ReservationDao {
         return name;
     }
 
+    public int deleteReservation(String id, String date, String room, String seat, String sTime, String eTime){
+        int rt = 0;
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        String query = "DELETE FROM reservation WHERE reservation_id = ? AND reservation_lectureroom_num=? " +
+                "AND reservation_startTime = ? AND reservation_endTime = ? AND reservation_seat = ? AND reservation_date = ?";
+
+        try {
+            conn = DatabaseUtil.getConnection();
+
+            if (conn == null) return rt;
+            pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, id);
+            pstmt.setString(2, room);
+            pstmt.setString(3, sTime);
+            pstmt.setString(4, eTime);
+            pstmt.setString(5, seat);
+            pstmt.setString(6, date);
+            pstmt.executeUpdate();
+            rt = DELETE_SUCCESS;
+        } catch (SQLException e) {
+            rt = DELETE_FAIL;
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return rt;
+    }
 }

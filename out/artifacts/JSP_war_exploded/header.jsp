@@ -14,6 +14,7 @@
     Date toDate = new Date();
     SimpleDateFormat today = new SimpleDateFormat("yyyy-MM-dd");
     String toName = toDao.getLongTimeName(today.format(toDate));
+    if(toName=="") toName = "현재 없음";
 %>
 <html>
 <head>

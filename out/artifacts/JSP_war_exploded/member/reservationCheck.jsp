@@ -84,8 +84,15 @@
                             <th>예약 시작 시간</th>
                             <th>예약 종료 시간</th>
                             <th>예약 승인 여부</th>
-                            <th>승인</th>
                             <th>연장</th>
+                            <th>취소</th>
+                            <%
+                                if(session.getAttribute("position").equals("admin")){
+                            %>
+                                <th>승인</th>
+                            <%
+                                }
+                            %>
                         </tr>
                         <%
                             if(count > 0){
@@ -101,18 +108,21 @@
                             <td><%=reservationDtoList.get(i).getStartTime()%></td>
                             <td><%=reservationDtoList.get(i).getEndTime()%></td>
                             <td><%=reservationDtoList.get(i).getState()%></td>
+                            <td><input type="button" value="연장"> </td>
+                            <td><input type="button" value="취소" onclick="location.href='/member/reservation/deleteReservation.jsp?id=<%=reservationDtoList.get(i).getId()%>&date=<%=reservationDtoList.get(i).getDate()%>&room=<%=reservationDtoList.get(i).getLectureroomNum()%>&seat=<%=reservationDtoList.get(i).getSeat()%>&sTime=<%=reservationDtoList.get(i).getStartTime()%>&eTime=<%=reservationDtoList.get(i).getEndTime()%>'"> </td>
                             <%
-                                if(reservationDtoList.get(i).getState().equals("대기중")){
+                                if(session.getAttribute("position").equals("admin")){
+                                    if(reservationDtoList.get(i).getState().equals("대기중")){
                             %>
-                            <td><input type="button" value="승인" class="recognizeBtn"> </td>
+                                        <td><input type="button" value="승인" class="recognizeBtn"> </td>
                             <%
-                            }else{
+                                    }else{
                             %>
-                            <td><input type="button" class="recognize" value="승인" disabled="true"> </td>
+                                        <td><input type="button" class="recognize" value="승인" disabled="true"> </td>
                             <%
+                                    }
                                 }
                             %>
-                            <td><input type="button" value="연장"> </td>
                         </tr>
                         <%
                                 }

@@ -104,7 +104,6 @@
 <%
             }
         }else if(selectedSeat.size() >= 20 && tf){
-            System.out.println("zz");
 %>
         <script>
             var con = confirm("다음 강의실 쓰겠습니까?");
