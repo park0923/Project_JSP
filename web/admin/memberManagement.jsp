@@ -23,6 +23,149 @@
     List<UserDto> userDtoList = dao.getUserPaging(Row, pageSize);
 %>
 <html>
+<style>
+    .details .inquiryBox
+    {
+        position: relative;
+        width: 100%;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        border-radius: 20px;
+        box-shadow: 0 7px 25px rgba(0,0,0,0.5);
+    }
+    .cardHeader
+    {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+    .cardHeader h2
+    {
+        font-weight: 600;
+        color: var(--blue);
+    }
+    .btn
+    {
+        position: relative;
+        padding: 5px 10px;
+        background: var(--blue);
+        text-decoration: none;
+        color: var(--white);
+        border-radius: 6px;
+    }
+    .btn:hover
+    {
+        background: var(--blue2);
+        color: var(--blue);
+    }
+    .btn_up
+    {
+        position: relative;
+        padding: 5px 10px;
+        background: blue;
+        text-decoration: none;
+        color: var(--white);
+        border-radius: 6px;
+    }
+    .btn_up:hover
+    {
+        background: var(--blue2);
+        color: var(--white);
+    }
+    .btn_del
+    {
+        position: relative;
+        padding: 5px 10px;
+        background: #FE2E2E;
+        text-decoration: none;
+        color: var(--white);
+        border-radius: 6px;
+    }
+    .btn_del:hover
+    {
+        background: #F78181;
+        color: var(--white);
+    }
+
+    .details .inquiryBox table
+    {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+    .details .inquiryBox table thead td
+    {
+        font-weight: 600;
+        text-align: center;
+    }
+    .details .inquiryBox table tr
+    {
+        color: var(--black1);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    .details .inquiryBox table tr:last-child
+    {
+        border-bottom: none;
+    }
+
+    .details .inquiryBox table tr td .view
+    {
+        text-decoration: none;
+        color:  var(--black1);
+    }
+    .details .inquiryBox table tr td .view:hover
+    {
+        text-decoration: none;
+        color:  var(--white);
+    }
+    .details .inquiryBox table tr td
+    {
+        padding: 10px;
+        text-align: center;
+    }
+    .details .inquiryBox table tbody tr td:nth-child(6)
+    {
+        text-align: end;
+    }
+
+    input[type=text]{
+        size: 50px;
+        width: 100%;
+        border: 0;
+        text-align: center;
+    }
+
+
+    .custom-btn2 {
+        width: 200px;
+        height: 20px;
+        color: #fff;
+        border-radius: 5px;
+        padding: 10px 5px;
+        font-family: 'Lato', sans-serif;
+        font-weight: bold;
+        font-size: large;
+        background: transparent;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: center;
+        display: inline-block;
+        box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+        7px 7px 20px 0px rgba(0,0,0,.1),
+        4px 4px 5px 0px rgba(0,0,0,.1);
+        outline: none;
+    }
+    .btn-2 {
+        background: rgb(19, 109, 252);
+        background: linear-gradient(0deg, rgb(45, 61, 250) 0%, rgba(12,25,180,1) 100%);
+        border: none;
+    }
+    .btn-2:hover {
+        background: rgb(0,3,255);
+        background: linear-gradient(0deg, rgba(0,3,255,1) 0%, rgba(2,126,251,1) 100%);
+    }
+</style>
 <head>
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="../navigation.css">
@@ -34,14 +177,24 @@
         <%@ include file="../navigation.jsp" %>
     </div>
     <div class="main">
-        <div class="header">
+        <div class="header" style="padding-bottom: 0px">
             <%@ include file="../header.jsp" %>
         </div>
+        <div class="container">
         <div class="contents">
             <div class="details">
+                <div class="inquiryBox">
                 <table>
                     <tr>
-                        <td>아이디</td><td>이름</td><td>이메일</td><td>전화번호</td><td>유형</td><td>예약 가능 상태</td><td>경고</td><td>버튼</td>
+                        <td style="width: 60px"> 순번 </td>
+                        <td> 아이디 </td>
+                        <td> 이름 </td>
+                        <td> 이메일 </td>
+                        <td> 전화번호 </td>
+                        <td style="padding-right: 60px"> 유형</td>
+                        <td > 예약가능</td>
+                        <td> 경고</td>
+                        <td> 수정</td>
                     </tr>
                     <%
                         for(int i=0; i<userDtoList.size(); i++){
@@ -56,14 +209,13 @@
                             <td><input type="text" value="<%=userDtoList.get(i).getPosition()%>" readonly></td>
                             <td><input type="text" value="<%=userDtoList.get(i).getState()%>" readonly></td>
                             <td><input type="text" value="<%=userDtoList.get(i).getWarning()%>" readonly></td>
-                            <td><input type="submit" value="수정"></td>
-                        </tr>
+                            <td><button class="custom-btn2 btn-2" style="width: 200px; height: 40px" type="submit">수정</button></td>                        </tr>
                     </form>
                     <%
                         }
                     %>
                     <tr>
-                        <td colspan="8" align="center">
+                        <td colspan="8" align="center" style="margin-left: 50px; padding-left: 120px">
                             <%
                                 if(count > 0){
                                     int pageCount = count / pageSize + (count%pageSize == 0 ? 0 : 1);
@@ -100,9 +252,11 @@
                         </td>
                     </tr>
                 </table>
-                <input type="button" onclick="location.href='../home/joinform.jsp'" value="회원 추가">
+                </div>
+                <button class="custom-btn2 btn-2" style="height: 50px; margin-top: 40px; margin-right: 100px" onclick="location.href='../home/joinform.jsp'" >회원 추가</button>
             </div>
         </div>
+    </div>
     </div>
 </div>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
