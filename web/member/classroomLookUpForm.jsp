@@ -12,6 +12,38 @@
 <head>
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="main.css">
+    <style>
+        .details .classroomLookUp{
+            position: relative;
+            width: 900px;
+            height: 750px;
+            padding: 30px;
+            margin-top: -30px;
+            margin-left: 200px;
+            border-radius: 20px;
+            box-shadow: 0 7px 25px rgba(0,0,0,0.5);
+        }
+        table{
+            border: 2px solid #d2d2d2;
+            border-collapse: collapse;
+            font-size: 0.9em;
+            text-align: center;
+
+        }
+        th, td{
+            border: 1px solid #d2d2d2;
+            border-collapse: collapse;
+            padding: 10px;
+            table-layout: fixed;
+        }
+        th{
+            height: 5px;
+        }
+        td {
+            width: 90px;
+            height: 60px;
+        }
+    </style>
 </head>
 <body>
 <%
@@ -92,14 +124,15 @@
         </div>
         <div class="contents">
             <div class="details">
-                <select onChange="change(this.options[this.selectedIndex].value)" >
+                <div class="classroomLookUp">
+                <select onChange="change(this.options[this.selectedIndex].value)" style="margin-right: 20px" >
                     <option selected>강의실 선택</option>
                     <option value="selectBox01">915</option>
                     <option value="selectBox02">916</option>
                     <option value="selectBox03">918</option>
                     <option value="selectBox04">911</option>
                 </select>
-                <table id="view1" style="display: none" >
+                <table id="view1" style="display: none; border: solid 0px" >
                     <tr>
                         <td></td><td>월</td><td>화</td><td>수</td><td>목</td><td>금</td>
                     </tr>
@@ -118,7 +151,7 @@
                         }
                     %>
                 </table>
-                <table id="view2" style="display: none" >
+                <table id="view2" style="display: none; border: solid 0px" >
                     <tr>
                         <td></td><td>월</td><td>화</td><td>수</td><td>목</td><td>금</td>
                     </tr>
@@ -137,7 +170,7 @@
                         }
                     %>
                 </table>
-                <table id="view3" style="display: none" >
+                <table id="view3" style="display: none; border: solid 0px" >
                     <tr>
                         <td></td><td>월</td><td>화</td><td>수</td><td>목</td><td>금</td>
                     </tr>
@@ -156,7 +189,7 @@
                         }
                     %>
                 </table>
-                <table id="view4" style="display: none" >
+                <table id="view4" style="display: none; border: solid 0px" >
                     <tr>
                         <td></td><td>월</td><td>화</td><td>수</td><td>목</td><td>금</td>
                     </tr>
@@ -175,6 +208,7 @@
                         }
                     %>
                 </table>
+                </div>
             </div>
         </div>
     </div>

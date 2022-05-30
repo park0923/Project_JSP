@@ -12,6 +12,43 @@
 <head>
     <title>예약 조회</title>
     <link rel="stylesheet" type="text/css" href="main.css">
+    <style>
+        .details .reservationCheck{
+            position: relative;
+            width: 1300px;
+            height: 700px;
+            padding: 30px;
+            margin-top: -30px;
+            margin-left: 50px;
+            border-radius: 20px;
+            box-shadow: 0 7px 25px rgba(0,0,0,0.5);
+        }
+        table{
+            border: 2px solid #d2d2d2;
+            border-collapse: collapse;
+            font-size: 0.9em;
+            text-align: center;
+            width: 1200px;
+            margin-left: 20px;
+        }
+        th, td{
+            border: 1px solid #d2d2d2;
+            border-collapse: collapse;
+            padding: 10px;
+        }
+        th{
+            height: 5px;
+        }
+        td {
+            width: 90px;
+            height: 10px;
+        }
+        caption{
+            margin-bottom: 30px;
+            font-size: xx-large;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
 <%
@@ -72,6 +109,7 @@
         </div>
         <div class="contents">
             <div class="details">
+                <div class="reservationCheck">
                 <section>
                     <table style="border-spacing: 30px">
                         <caption>현재 예약 정보</caption>
@@ -129,7 +167,7 @@
                             }
                         %>
                         <tr>
-                            <td colspan="8" align="center">
+                            <td colspan="11" align="center">
                                 <%
                                     if(count > 0){
                                         // 총 페이지의 수
@@ -173,6 +211,7 @@
                         </tr>
                     </table>
                 </section>
+                </div>
             </div>
         </div>
     </div>
