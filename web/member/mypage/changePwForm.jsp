@@ -14,6 +14,7 @@
       width:60%;
       margin:auto;
     }
+
     table{
       border: 2px solid #d2d2d2;
       border-collapse: collapse;
@@ -45,7 +46,7 @@
     }
     .register{
       width: 550px;
-      height: 600px;
+      height: 500px;
       margin: 200px auto 0;
       padding: 15px 15px;
       background: white;
@@ -185,10 +186,12 @@
 
   </style>
   <script src="../form.js?ver=5"></script>
-  <title>Title</title>
+  <title>비밀번호변경</title>
 </head>
 <body>
 <form action="changePwProcess.jsp" method="post" name="change_form">
+
+  <div>
 
   <div class="register" style="padding-left: 40px; margin-top: 100px;">
     <h3 style="margin-bottom: 50px; border-left-width: 0px; margin-left: 0px; padding-top: 50px;">비밀번호 변경</h3>
@@ -225,11 +228,12 @@
       </ul>
 
       </table>
-      <div>
+      <div style="margin-top: 30px">
         <input class="custom-btn2 btn-2" style="width: 200px; height: 40px;" type="button" value="변경" onclick="confirmChange(this)" >
         <input class="custom-btn2 btn-2" style="width: 200px; height: 40px;" type="button" onclick="window.close()" value="취소">
       </div>
     </div>
+
   </div>
 </form>
 
