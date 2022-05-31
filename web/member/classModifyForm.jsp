@@ -1,6 +1,8 @@
 <%@ page import="mysql.ReservationDao" %>
 <%@ page import="beans.ReservationDto" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="mysql.ScheduleDao" %>
+<%@ page import="beans.ScheduleDto" %><%--
   Created by IntelliJ IDEA.
   User: wndgk
   Date: 2022-05-18
@@ -10,7 +12,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>예약 조회</title>
+    <title>강의실 정보</title>
     <link rel="stylesheet" type="text/css" href="main.css">
     <style>
         .details .reservationCheck{
@@ -62,8 +64,7 @@
     }
 %>
 <%
-    ReservationDao dao = ReservationDao.getInstance();
-    List<ReservationDto> reservationDtoList = null;
+    ScheduleDao dao = ScheduleDao.getInstance();
     String pageNum = request.getParameter("pageNum");
     if(pageNum == null){
         pageNum = "1";
@@ -71,32 +72,18 @@
     int pageSize = 10;
     int currentPage = Integer.parseInt(pageNum);
     int Row = (currentPage - 1) * pageSize;
-    int count;
+    int count = dao.getCount();
+    List<ScheduleDto> scheduleDtoList = null;
 
-    if(session.getAttribute("position").equals("admin")){
-         count = dao.getCount();
-        if(count > 0){
-            reservationDtoList = dao.getReservation(Row, pageSize, "");
-        }else {
+    if(count > 0){
+        scheduleDtoList = dao.getSchedulePaging(Row, pageSize);
+    }else {
         %>
-            <script>
-                alert("예약이 없습니다.")
-                history.back();
-            </script>
+        <script>
+            alert("예약이 없습니다.")
+            history.back();
+        </script>
         <%
-        }
-    }else{
-        count = dao.getIdCount((String) session.getAttribute("id"));
-        if(count > 0){
-            reservationDtoList = dao.getReservation(Row, pageSize, (String) session.getAttribute("id"));
-        }else{
-        %>
-            <script>
-                alert("예약이 없습니다.")
-                history.back();
-            </script>
-        <%
-        }
     }
 %>
 <div class="container">
@@ -115,12 +102,12 @@
                         <caption>예약 정보</caption>
                         <tr>
                             <th>순서</th>
-                            <th>아이디</th>
-                            <th>사용 날짜</th>
-                            <th>사용 강의실</th>
-                            <th>사용 좌석</th>
+                            <th>강의 이름</th>
+                            <th>강의실</th>
+                            <th>강의 시작 시간</th>
+                            <th>강의 종료 시간</th>
                             <th>예약 시작 시간</th>
-                            <th>예약 종료 시간</th>
+                            <th>요일</th>
                             <th>예약 승인 여부</th>
                             <th>연장</th>
                             <th>취소</th>
@@ -146,8 +133,7 @@
                             <td><%=reservationDtoList.get(i).getStartTime()%></td>
                             <td><%=reservationDtoList.get(i).getEndTime()%></td>
                             <td><%=reservationDtoList.get(i).getState()%></td>
-<%--                            <td><input type="button" value="연장" class="checkBtn"> </td>--%>
-                            <td><input type="button" value="연장" class="checkBtn" onclick="extendTimePopUp('reservationExtend.jsp?date=<%=reservationDtoList.get(i).getDate()%>&room=<%=reservationDtoList.get(i).getLectureroomNum()%>&seat=<%=reservationDtoList.get(i).getSeat()%>&sTime=<%=reservationDtoList.get(i).getStartTime()%>&eTime=<%=reservationDtoList.get(i).getEndTime()%>')"> </td>
+                            <td><input type="button" value="연장"> </td>
                             <td><input type="button" value="취소" onclick="location.href='/member/reservation/deleteReservation.jsp?id=<%=reservationDtoList.get(i).getId()%>&date=<%=reservationDtoList.get(i).getDate()%>&room=<%=reservationDtoList.get(i).getLectureroomNum()%>&seat=<%=reservationDtoList.get(i).getSeat()%>&sTime=<%=reservationDtoList.get(i).getStartTime()%>&eTime=<%=reservationDtoList.get(i).getEndTime()%>'"> </td>
                             <%
                                 if(session.getAttribute("position").equals("admin")){
@@ -265,46 +251,6 @@
         sendPost('reservationRecognize.jsp', tdArr)
     });
 
-    function extendTimePopUp(url){
-        var str = ""
-        var tdArr = new Array();	// 배열 선언
-        var checkBtn = $(".checkBtn");
-
-        // checkBtn.parent() : checkBtn의 부모는 <td>이다.
-        // checkBtn.parent().parent() : <td>의 부모이므로 <tr>이다.
-        var tr = checkBtn.parent().parent();
-        var td = tr.children();
-
-
-        var date = td.eq(2).text();
-        date = date.split("-");
-        var sTime =td.eq(5).text();
-        sTime = sTime.split(":");
-        var eTime =td.eq(6).text();
-        eTime = eTime.split(":");
-
-        var now = new Date();
-        var year = now.getFullYear();
-        var month = now.getMonth()+1;
-        var day = now.getDate();
-        var hour = now.getHours();
-        var minutes = now.getMinutes();
-
-        var date1 = new Date(year, month, day, hour, minutes);
-        var date2 = new Date(date[0], date[1], date[2], eTime[0], eTime[1]);
-
-        var date3 = new Date(date[0], date[1], date[2], sTime[0], sTime[1]);
-        var chMin = (date1.getTime() - date3.getTime())
-        var elMin = (date2.getTime() - date1.getTime())/1000/60;
-        if(elMin>0 && chMin>0){
-            alert(elMin+"분 남았습니다.");
-        }else if(chMin<0){
-            alert("아직 예약이 시작되지않았습니다.");
-        }else{
-            alert("확인 못함");
-        }
-        open(url,'pop01' ,'top=10, left=10, width=800, height=800, status=no, menubar=no, toolbar=no, resizable=no');
-    }
 
 </script>
 </html>

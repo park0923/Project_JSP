@@ -12,6 +12,43 @@
 <head>
     <title>예약 조회</title>
     <link rel="stylesheet" type="text/css" href="main.css">
+    <style>
+        .details .reservationCheck{
+            position: relative;
+            width: 1300px;
+            height: 700px;
+            padding: 30px;
+            margin-top: -30px;
+            margin-left: 50px;
+            border-radius: 20px;
+            box-shadow: 0 7px 25px rgba(0,0,0,0.5);
+        }
+        table{
+            border: 2px solid #d2d2d2;
+            border-collapse: collapse;
+            font-size: 0.9em;
+            text-align: center;
+            width: 1200px;
+            margin-left: 20px;
+        }
+        th, td{
+            border: 1px solid #d2d2d2;
+            border-collapse: collapse;
+            padding: 10px;
+        }
+        th{
+            height: 5px;
+        }
+        td {
+            width: 90px;
+            height: 10px;
+        }
+        caption{
+            margin-bottom: 30px;
+            font-size: xx-large;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
 <%
@@ -72,9 +109,10 @@
         </div>
         <div class="contents">
             <div class="details">
+                <div class="reservationCheck">
                 <section>
                     <table style="border-spacing: 30px">
-                        <caption>현재 예약 정보</caption>
+                        <caption>예약 정보</caption>
                         <tr>
                             <th>순서</th>
                             <th>아이디</th>
@@ -108,7 +146,8 @@
                             <td><%=reservationDtoList.get(i).getStartTime()%></td>
                             <td><%=reservationDtoList.get(i).getEndTime()%></td>
                             <td><%=reservationDtoList.get(i).getState()%></td>
-                            <td><input type="button" value="연장"> </td>
+<%--                            <td><input type="button" value="연장" class="checkBtn"> </td>--%>
+                            <td><input type="button" value="연장" class="checkBtn" onclick="extendTimePopUp('reservationExtend.jsp?date=<%=reservationDtoList.get(i).getDate()%>&room=<%=reservationDtoList.get(i).getLectureroomNum()%>&seat=<%=reservationDtoList.get(i).getSeat()%>&sTime=<%=reservationDtoList.get(i).getStartTime()%>&eTime=<%=reservationDtoList.get(i).getEndTime()%>')"> </td>
                             <td><input type="button" value="취소" onclick="location.href='/member/reservation/deleteReservation.jsp?id=<%=reservationDtoList.get(i).getId()%>&date=<%=reservationDtoList.get(i).getDate()%>&room=<%=reservationDtoList.get(i).getLectureroomNum()%>&seat=<%=reservationDtoList.get(i).getSeat()%>&sTime=<%=reservationDtoList.get(i).getStartTime()%>&eTime=<%=reservationDtoList.get(i).getEndTime()%>'"> </td>
                             <%
                                 if(session.getAttribute("position").equals("admin")){
@@ -129,7 +168,7 @@
                             }
                         %>
                         <tr>
-                            <td colspan="8" align="center">
+                            <td colspan="11" align="center">
                                 <%
                                     if(count > 0){
                                         // 총 페이지의 수
@@ -173,6 +212,7 @@
                         </tr>
                     </table>
                 </section>
+                </div>
             </div>
         </div>
     </div>
@@ -225,6 +265,46 @@
         sendPost('reservationRecognize.jsp', tdArr)
     });
 
+    function extendTimePopUp(url){
+        var str = ""
+        var tdArr = new Array();	// 배열 선언
+        var checkBtn = $(".checkBtn");
+
+        // checkBtn.parent() : checkBtn의 부모는 <td>이다.
+        // checkBtn.parent().parent() : <td>의 부모이므로 <tr>이다.
+        var tr = checkBtn.parent().parent();
+        var td = tr.children();
+
+
+        var date = td.eq(2).text();
+        date = date.split("-");
+        var sTime =td.eq(5).text();
+        sTime = sTime.split(":");
+        var eTime =td.eq(6).text();
+        eTime = eTime.split(":");
+
+        var now = new Date();
+        var year = now.getFullYear();
+        var month = now.getMonth()+1;
+        var day = now.getDate();
+        var hour = now.getHours();
+        var minutes = now.getMinutes();
+
+        var date1 = new Date(year, month, day, hour, minutes);
+        var date2 = new Date(date[0], date[1], date[2], eTime[0], eTime[1]);
+
+        var date3 = new Date(date[0], date[1], date[2], sTime[0], sTime[1]);
+        var chMin = (date1.getTime() - date3.getTime())
+        var elMin = (date2.getTime() - date1.getTime())/1000/60;
+        if(elMin>0 && chMin>0){
+            alert(elMin+"분 남았습니다.");
+        }else if(chMin<0){
+            alert("아직 예약이 시작되지않았습니다.");
+        }else{
+            alert("확인 못함");
+        }
+        open(url,'pop01' ,'top=10, left=10, width=800, height=800, status=no, menubar=no, toolbar=no, resizable=no');
+    }
 
 </script>
 </html>

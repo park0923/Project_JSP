@@ -9,13 +9,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     request.setCharacterEncoding("utf-8");
+    String sDate = request.getParameter("sDate");
+    String eDate = request.getParameter("eDate");
     String name = request.getParameter("className");
     String roomNum = request.getParameter("lectureRoom");
     String sTime = request.getParameter("startTime");
     String eTime = request.getParameter("endTime");
     String week = request.getParameter("week");
     ScheduleDao dao = ScheduleDao.getInstance();
-    if(dao.insertSchedule(name, roomNum, sTime, eTime, week)==ScheduleDao.SCHEDULE_INSERT_SUCCESS){
+    if(dao.insertSchedule(name, roomNum, sTime, eTime, week, sDate, eDate)==ScheduleDao.SCHEDULE_INSERT_SUCCESS){
 %>
 <script>
     alert("강의 등록에 성공 했습니다.");

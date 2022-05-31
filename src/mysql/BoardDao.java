@@ -248,20 +248,21 @@ public class BoardDao {
         return rt;
     }
 
-    public int updateinquiry(String board_index, String body){
+    public int updateinquiry(String board_index, String body, String date){
         int rt = 0;
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
-        String query = "UPDATE board SET board_inquiry=? WHERE board_index = ?";
+        String query = "UPDATE board SET board_inquiry=?, create_date=?  WHERE board_index = ?";
 
         try {
             conn = DatabaseUtil.getConnection();
             if (conn == null) return rt;
             pstmt = conn.prepareStatement(query);
             pstmt.setString(1, body);
-            pstmt.setInt(2, Integer.parseInt(board_index));
+            pstmt.setString(2, date);
+            pstmt.setInt(3, Integer.parseInt(board_index));
             pstmt.executeUpdate();
             rt = NOTICE_UPDATE_SUCCESS;
         } catch (SQLException e) {
@@ -387,6 +388,42 @@ public class BoardDao {
                 pstmt.setInt(2, startRow);
                 pstmt.setInt(3, endRow);
             }
+            rs = pstmt.executeQuery();
+
+            while(rs.next()){
+                BoardDto dto = new BoardDto(rs.getInt("board_index"), rs.getString("board_title"), rs.getString("board_inquiry"), rs.getString("board_studentID"),
+                        rs.getString("board_classification"), rs.getDate("create_date"));
+                list.add(dto);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    public List<BoardDto> getNoticeInquiry(int startRow, int endRow){
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        String query = "";
+        ResultSet rs = null;
+        ArrayList<BoardDto> list = new ArrayList<>();
+        try {
+            conn = DatabaseUtil.getConnection();
+            if (conn == null) return null;
+            query = "SELECT * FROM board WHERE board_classification = 'notice' ORDER BY board_classification DESC, create_date DESC LIMIT ?, ?;";
+            pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, startRow);
+            pstmt.setInt(2, endRow);
+
             rs = pstmt.executeQuery();
 
             while(rs.next()){

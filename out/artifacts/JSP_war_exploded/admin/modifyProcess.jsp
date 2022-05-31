@@ -11,7 +11,6 @@
 <%
     UserDao dao = UserDao.getInstance();
     String id = (String) session.getAttribute("id");
-    System.out.println(id);
     UserDto user = new UserDto.Builder()
             .id(request.getParameter("id"))
             .pw(request.getParameter("pw"))
@@ -26,9 +25,9 @@
 %>
         <script>
             alert("회원정보 수정 완료");
+            location.href = "../member/mainForm.jsp";
         </script>
 <%
-        response.sendRedirect("main.jsp");
     }else{
 %>
         <script>

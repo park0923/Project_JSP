@@ -10,11 +10,11 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    ReservationDao toDao = ReservationDao.getInstance();
-    Date toDate = new Date();
-    SimpleDateFormat today = new SimpleDateFormat("yyyy-MM-dd");
-    String toName = toDao.getLongTimeName(today.format(toDate));
-    if(toName=="") toName = "현재 없음";
+    ReservationDao r = ReservationDao.getInstance();
+    Date d = new Date();
+    SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
+    String n = r.getLongTimeName(s.format(d));
+    if(n=="") n = "현재 없음";
 %>
 <html>
 <head>
@@ -74,9 +74,9 @@
     </div>
     <div class="user">
         <ul>
-            <li>오늘 정리하는 사람: <%=toName%></li>
+            <li>오늘 정리하는 사람: <%=n%></li>
             <li> <%=session.getAttribute("name")%></li>
-            <li><a href="../home/logout.jsp">로그아웃</a></li>
+            <li><a href="/home/logout.jsp">로그아웃</a></li>
         </ul>
     </div>
 </div>

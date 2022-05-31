@@ -306,7 +306,7 @@ public class ReservationDao {
         String sql = "SELECT member_name FROM member JOIN " +
                 "(SELECT MAX(CONVERT(SUBSTR(reservation_endTime,1,2), signed integer)), reservation_id, reservation_endTime FROM reservation " +
                 "WHERE reservation_state='승인' AND reservation_date=?) r " +
-                "WHERE member_id=r.reservation_id;";
+                "WHERE member_id=r.reservation_id";
         try {
             conn = DatabaseUtil.getConnection();
             pstmt = conn.prepareStatement(sql);
@@ -353,6 +353,83 @@ public class ReservationDao {
             rt = DELETE_SUCCESS;
         } catch (SQLException e) {
             rt = DELETE_FAIL;
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return rt;
+    }
+
+
+
+    public int getExtendTime(String seat, int sTime, String room, int week){
+        int rt = 0;
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String sql = "SELECT MIN(CONVERT(SUBSTR(r.reservation_startTime,1, INSTR(r.reservation_startTime,':')-1), signed integer)) rcnt, MIN(CONVERT(SUBSTR(s.schedule_class_Stime,1, INSTR(s.schedule_class_Stime,':')-1), signed integer)) scnt FROM reservation r, schedule s " +
+                "WHERE reservation_seat =? AND reservation_startTime > ? AND s.schedule_lectureroom_num =? AND s.schedule_week = ?";
+        try {
+            conn = DatabaseUtil.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, seat);
+            pstmt.setInt(2, sTime);
+            pstmt.setString(3, room);
+            pstmt.setInt(4, week);
+            rs = pstmt.executeQuery();
+            if(rs.next()){
+                int r = rs.getInt("rcnt");
+                int s = rs.getInt("scnt");
+                if(r>=s){
+                    rt=s;
+                }else {
+                    rt=r;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return rt;
+    }
+
+    public int updateExtendTime(String time, String seat, String date, String room, String sTime, String eTime){
+        int rt = 0;
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        String query = "UPDATE reservation SET reservation_endTime=? WHERE reservation_lectureroom_num=? AND " +
+                "reservation_startTime = ? AND reservation_endTime = ? AND reservation_seat = ? AND reservation_date = ?";
+
+        try {
+            conn = DatabaseUtil.getConnection();
+            if (conn == null) return rt;
+            pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, time);
+            pstmt.setString(2, room);
+            pstmt.setString(3, sTime);
+            pstmt.setString(4, eTime);
+            pstmt.setString(5, seat);
+            pstmt.setString(6, date);
+
+            pstmt.executeUpdate();
+            rt = UPDATE_SUCCESS;
+        } catch (SQLException e) {
+            rt = UPDATE_FAIL;
             e.printStackTrace();
         } finally {
             try {

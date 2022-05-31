@@ -204,12 +204,12 @@
                             </div>
                         </div>
                         <hr>
-                        <form action="/member/inquiry/inquiryupdateprocess.jsp?id=<%=request.getParameter("id")%>" method="post">
+                        <form action="/member/inquiry/inquiryupdateprocess.jsp?id=<%=request.getParameter("id")%>" method="post" name="inquiry_form">
                             <div class="inputBox">
                                 <textarea typeof="text" name="inquiry" placeholder="내용을 입력하세요"><%=boardDto.getBoard_inquiry()%></textarea>
                             </div>
                             <div class="inputBox">
-                                <input type="submit" value="작성">
+                                <button type="button"  onclick="confirmChange()" >작성</button>
                                 <button type="button" onclick="location.href='inquiryList.jsp'">취소</button>
                             </div>
                         </form>
@@ -229,5 +229,16 @@
 </div>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script>
+    function confirmChange() {
+        if(document.inquiry_form.inquiry.value === ""){
+            alert("내용을 입력하세요");
+            document.inquiry_form.inquiry.focus();
+            return;
+        }
+
+        document.inquiry_form.submit();
+    }
+</script>
 </body>
 </html>

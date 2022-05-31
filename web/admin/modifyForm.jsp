@@ -15,7 +15,6 @@
     session.setAttribute("id", user.getId());
 %>
 <head>
-    <script src="../member/form.js"></script>
     <link rel="stylesheet" type="text/css" href="/member/main.css">
 <style>
 
@@ -210,7 +209,7 @@
                 <hr/>
                 <div class="inquiryBox">
 
-                <form action="modifyProcess.jsp" method="post" name="modify_form">
+                <form action="modifyProcess.jsp" method="post" name="admin_modify_form">
                     <table>
                         <tr>
                             <td>ID</td>
@@ -284,8 +283,8 @@
                     </table>
                     <br/>
                     <div class="c">
-                        <button class="custom-btn2 btn-2" type="submit"  onclick="AdminModifySendId(id)" > 수정</button>
-                        <button class="custom-btn2 btn-2"   onclick="location.href='main.jsp'" > 취소</button>
+                        <input type="button" class="custom-btn2 btn-2" value="수정" onclick="confirmModify()" >
+                        <input type="button" class="custom-btn2 btn-2" value="취소" onclick="location.href='../member/mainForm.jsp'">
 
                     </div>
                 </form>
@@ -296,5 +295,35 @@
 </div>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script>
+    function confirmModify() {
+        if(document.admin_modify_form.id.value === ""){
+            alert("아이디를 입력하세요.");
+            document.admin_modify_form.id.focus();
+            return;
+        }
+        if(document.admin_modify_form.pw.value === ""){
+            alert("비밀번호를 입력하세요.");
+            document.admin_modify_form.pw.focus();
+            return;
+        }
+        if(document.admin_modify_form.name.value === ""){
+            alert("이름을 입력하세요.");
+            document.admin_modify_form.id.focus();
+            return;
+        }
+        if(document.admin_modify_form.phone.value === ""){
+            alert("전화번호를 입력하세요.");
+            document.admin_modify_form.id.focus();
+            return;
+        }
+        if(document.admin_modify_form.email.value === ""){
+            alert("이메일을 입력하세요.");
+            document.admin_modify_form.id.focus();
+            return;
+        }
+        document.admin_modify_form.submit();
+    }
+</script>
 </body>
 </html>

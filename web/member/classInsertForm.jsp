@@ -321,6 +321,16 @@
                                 <div class="selectStartTime">
                                     <ul class="container">
                                         <li class="item center">
+                                            <h3>수업 시작 날짜</h3>
+                                        </li>
+                                        <li class="item">
+                                            <input type="date" name="sDate" style="padding-right: 26px; width:290px">
+                                            <input type="date" name="eDate" style="padding-right: 26px; width:290px">
+                                        </li>
+                                    </ul>
+
+                                    <ul class="container">
+                                        <li class="item center">
                                             <h3>수업 시작</h3>
                                         </li>
                                         <li class="item">
@@ -395,13 +405,11 @@
                                             </select>
                                         </li>
                                     </ul>
-                                    <button class="custom-btn2 btn-2" type="submit" >강의등록</button>
-
+                                    <input type="button" class="custom-btn2 btn-2" value="강의등록" onclick="confirmInsert()" >
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 </form>
             </div>
         </div>

@@ -11,7 +11,7 @@
 <%
     UserDao dao = UserDao.getInstance();
     String id = (String) session.getAttribute("id");
-    System.out.println(id);
+
     UserDto user = new UserDto.Builder()
             .id(request.getParameter("id"))
             .pw(request.getParameter("pw"))

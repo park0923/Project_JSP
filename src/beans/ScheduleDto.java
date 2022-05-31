@@ -5,6 +5,8 @@ public class ScheduleDto {
     private String schedule_lectureroom_num;
     private String schedule_class_Stime;
     private String schedule_class_Etime;
+    private String schedule_Sdate;
+    private String schedule_Edate;
     private int schedule_week;
 
     public static class Builder{
@@ -12,6 +14,8 @@ public class ScheduleDto {
         private String schedule_lectureroom_num;
         private String schedule_class_Stime;
         private String schedule_class_Etime;
+        private String schedule_Sdate;
+        private String schedule_Edate;
         private int schedule_week;
 
         public Builder schedule_name(String schedule_name){
@@ -39,6 +43,16 @@ public class ScheduleDto {
             return this;
         }
 
+        public Builder schedule_Sdate(String schedule_Sdate){
+            this.schedule_Sdate = schedule_Sdate;
+            return this;
+        }
+
+        public Builder schedule_Edate(String schedule_Edate){
+            this.schedule_Edate = schedule_Edate;
+            return this;
+        }
+
         public ScheduleDto build() { return new ScheduleDto(this);}
     }
 
@@ -49,6 +63,8 @@ public class ScheduleDto {
         this.schedule_lectureroom_num = builder.schedule_lectureroom_num;
         this.schedule_class_Stime = builder.schedule_class_Stime;
         this.schedule_class_Etime = builder.schedule_class_Etime;
+        this.schedule_Sdate = builder.schedule_Sdate;
+        this.schedule_Edate = builder.schedule_Edate;
         this.schedule_week = builder.schedule_week;
     }
 
@@ -90,5 +106,21 @@ public class ScheduleDto {
 
     public void setSchedule_week(int schedule_week) {
         this.schedule_week = schedule_week;
+    }
+
+    public String getSchedule_Sdate() {
+        return schedule_Sdate;
+    }
+
+    public void setSchedule_Sdate(String schedule_Sdate) {
+        this.schedule_Sdate = schedule_Sdate;
+    }
+
+    public String getSchedule_Edate() {
+        return schedule_Edate;
+    }
+
+    public void setSchedule_Edate(String schedule_Edate) {
+        this.schedule_Edate = schedule_Edate;
     }
 }

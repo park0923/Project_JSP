@@ -1,6 +1,7 @@
 <%@ page import="mysql.ScheduleDao" %>
 <%@ page import="java.util.List" %>
-<%@ page import="beans.ScheduleDto" %><%--
+<%@ page import="beans.ScheduleDto" %>
+<%@ page import="java.util.Calendar" %><%--
   Created by IntelliJ IDEA.
   User: tkfdk
   Date: 2022-05-27
@@ -47,6 +48,16 @@
 </head>
 <body>
 <%
+    Date date = new Date();
+    Calendar calendar = Calendar.getInstance();
+
+    SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd");
+    String todate = simpleDate.format(date);
+    calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+    String mon = simpleDate.format(calendar.getTime());
+    calendar.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
+    String fri = simpleDate.format(calendar.getTime());
+
     List<ScheduleDto> scheduleDto1;
     List<ScheduleDto> scheduleDto2;
     List<ScheduleDto> scheduleDto3;
@@ -59,10 +70,10 @@
     ScheduleDao dao = ScheduleDao.getInstance();
     String[] scheduleTime = {"9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00"};
 
-    scheduleDto1 = dao.selectSchedule("915");
-    scheduleDto2 = dao.selectSchedule("916");
-    scheduleDto3 = dao.selectSchedule("918");
-    scheduleDto4 = dao.selectSchedule("911");
+    scheduleDto1 = dao.selectSchedule("915", todate,mon,fri);
+    scheduleDto2 = dao.selectSchedule("916", todate,mon,fri);
+    scheduleDto3 = dao.selectSchedule("918", todate,mon,fri);
+    scheduleDto4 = dao.selectSchedule("911", todate,mon,fri);
 
     for(int j=0; j<8;j++){
         for(int i=0; i<5; i++){
