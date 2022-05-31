@@ -122,6 +122,21 @@
       {
         color: #4682B4;
       }
+      .inputbox .box input[type="button"]
+      {
+        background: lightskyblue;
+        border-radius: 30px;
+        box-shadow: 5px 5px 7px rgba(0,0,0,0.2);
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: 600;
+        margin-top: 10px;
+      }
+      .inputbox .box input[type="button"]:hover
+      {
+        color: #4682B4;
+      }
     </style>
   </head>
   <body>
@@ -145,6 +160,7 @@
           <div class="inputbox">
             <div class="box">
               <input type="submit" value="Log in">
+              <input type="button" value="main" onclick="location.href='../index.jsp'">
             </div>
           </div>
         </form>

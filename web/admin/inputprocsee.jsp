@@ -15,11 +15,11 @@
     String schedule_class_etime = request.getParameter("schedule_class_etime");
     String schedule_week = request.getParameter("schedule_week");
     ScheduleDao dao = ScheduleDao.getInstance();
-    System.out.println(schedule_name);
-    System.out.println(schedule_lectureroom_num);
-    System.out.println(schedule_class_stime);
-    System.out.println(schedule_class_etime);
-    System.out.println(schedule_week);
+//    System.out.println(schedule_name);
+//    System.out.println(schedule_lectureroom_num);
+//    System.out.println(schedule_class_stime);
+//    System.out.println(schedule_class_etime);
+//    System.out.println(schedule_week);
     if (dao.insertSchedule(schedule_name, schedule_lectureroom_num, schedule_class_stime, schedule_class_etime, schedule_week) == ScheduleDao.SCHEDULE_INSERT_SUCCESS){
 %>
         <script>

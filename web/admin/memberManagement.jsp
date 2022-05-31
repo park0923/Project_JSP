@@ -197,11 +197,12 @@
                         <td> 수정</td>
                     </tr>
                     <%
+                        int number = count - (currentPage - 1) * pageSize;
                         for(int i=0; i<userDtoList.size(); i++){
                     %>
                     <form action="modifyForm.jsp" method="post">
                         <tr>
-                            <td><%=i+1%></td>
+                            <td><%=number--%></td>
                             <td><input type="text" name="id" value="<%=userDtoList.get(i).getId()%>" readonly></td>
                             <td><input type="text" value="<%=userDtoList.get(i).getName()%>" readonly></td>
                             <td><input type="text" value="<%=userDtoList.get(i).getEmail()%>" readonly></td>

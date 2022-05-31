@@ -9,17 +9,22 @@
 <%@ page import="mysql.BoardDao" %>
 <%@ page import="mysql.UserDao" %>
 <%@ page import="beans.UserDto" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 
 <%
     String id = request.getParameter("id");
     String body = request.getParameter("inquiry");
+    Date date = new Date();
+    SimpleDateFormat sDate = new SimpleDateFormat("yyyy-MM-dd");
+    String strDate = sDate.format(date);
 
     UserDao udao = UserDao.getInstance();
     UserDto udto = udao.getUser((String) session.getAttribute("id"));
     BoardDao bdao = BoardDao.getInstance();
 
     if(udto.getPosition().equals("user")){
-        if(bdao.updateinquiry(id, body) == BoardDao.NOTICE_UPDATE_SUCCESS){
+        if(bdao.updateinquiry(id, body, strDate) == BoardDao.NOTICE_UPDATE_SUCCESS){
 
 %>
             <script>
@@ -39,7 +44,7 @@
           }
     }
     else if (udto.getPosition().equals("admin")){
-        if(bdao.updateinquiry(id, body) == BoardDao.NOTICE_UPDATE_SUCCESS){
+        if(bdao.updateinquiry(id, body, strDate) == BoardDao.NOTICE_UPDATE_SUCCESS){
 %>
             <script>
                 alert("수정 완료");

@@ -144,10 +144,13 @@
           String strDate = sDate.format(date);
         %>
 
-        <form name="reservation_form" method="post" action="reservation/seatSelection.jsp">
+        <form name="reservation_form" method="post" action="reservation/reservationAfter.jsp">
+<%--          <input type="date" id="start" name="date"--%>
+<%--                 value=<%= strDate%>--%>
+<%--                         min=<%=strDate%> max="2030-12-31" style="margin-left: 10px">--%>
           <input type="date" id="start" name="date"
-                 value=<%= strDate%>
-                         min=<%=strDate%> max="2030-12-31" style="margin-left: 10px">
+                 value="2022-05-30"
+                         min="2022-05-30" max="2030-12-31" style="margin-left: 10px">
           <Br>
 
           <span class="rs">

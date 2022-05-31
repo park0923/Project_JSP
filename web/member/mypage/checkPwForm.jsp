@@ -265,7 +265,7 @@
                             </div>
                             <div class="c" style="margin-left: 325px; width: 300px;">
                                 <input class="custom-btn1 btn-11 " type="button" value="확인" onclick="confirmPassword()">
-                                <input class="custom-btn1 btn-11 " type="button" value="취소" onclick="location.href='mainForm.jsp'">
+                                <input class="custom-btn1 btn-11 " type="button" value="취소" onclick="location.href='../mainForm.jsp'">
                             </div>
                         </div>
                     </form>

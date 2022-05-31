@@ -28,7 +28,7 @@
 %>
                 <script>
                     alert("예약에 성공 했습니다.");
-                    location.href = 'main.jsp';
+                    location.href = 'mainForm.jsp';
                 </script>
 <%
             }

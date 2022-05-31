@@ -29,8 +29,7 @@
             7px 7px 20px 0px rgba(0,0,0,.1),
             4px 4px 5px 0px rgba(0,0,0,.1);
             outline: none;
-            margin-left: 120px;
-            margin-top: 120px;
+            margin-top: 100px;
         }
         .btn-1 {
             background: rgb(19, 109, 252);

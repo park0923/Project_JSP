@@ -202,12 +202,13 @@
                         </thead>
                         <tbody>
                         <%
+                            int number = count - (currentPage - 1) * pageSize;
                             for(int i=0; i<boardDtoList.size(); i++){
                         %>
                         <tr>
-                            <td><%=i+1%></td>
+                            <td><%=number--%></td>
                             <td>
-                                <a class="view" href="inquiryview.jsp?id=<%=boardDtoList.get(i).getBoard_index()%>"><%=boardDtoList.get(i).getBoard_inquiry()%></a>
+                                <a class="view" href="inquiryview.jsp?id=<%=boardDtoList.get(i).getBoard_index()%>"><%=boardDtoList.get(i).getBoard_title()%></a>
                             </td>
                             <td><%=boardDtoList.get(i).getB0ard_studentID()%></td>
                             <td><%=boardDtoList.get(i).getCreate_date()%></td>

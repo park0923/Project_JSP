@@ -135,7 +135,7 @@
                                         <option value="10:00">10:00</option>
                                         <option value="11:00">11:00</option>
                                         <option value="12:00">12:00</option>
-                                        <option value="3:00">13:00</option>
+                                        <option value="13:00">13:00</option>
                                         <option value="14:00">14:00</option>
                                         <option value="15:00">15:00</option>
                                         <option value="17:00">17:00</option>
