@@ -343,7 +343,7 @@ public class BoardDao {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        String sql = "SELECT count(*) FROM board WHERE board_studentID=?";
+        String sql = "SELECT count(*) FROM board WHERE board_studentID=? OR board_classification ='notice'";
         try {
             conn = DatabaseUtil.getConnection();
             pstmt = conn.prepareStatement(sql);

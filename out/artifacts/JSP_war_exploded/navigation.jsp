@@ -199,6 +199,12 @@
                             <span class="title">강의 정보 입력</span>
                         </a>
                     </li>
+                    <li class="list">
+                        <a href="/member/classModifyForm.jsp">
+                            <span class="icon"><ion-icon name="calendar"></ion-icon></span>
+                            <span class="title">강의 정보 확인</span>
+                        </a>
+                    </li>
             <%
                 }else{
             %>

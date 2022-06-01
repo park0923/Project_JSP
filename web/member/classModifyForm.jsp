@@ -80,11 +80,12 @@
     }else {
         %>
         <script>
-            alert("예약이 없습니다.")
+            alert("강의가 없습니다.")
             history.back();
         </script>
         <%
     }
+    String[] weeks = {"0","일","월","화","수","목","금","토"};
 %>
 <div class="container">
     <div class="nav">
@@ -106,48 +107,27 @@
                             <th>강의실</th>
                             <th>강의 시작 시간</th>
                             <th>강의 종료 시간</th>
-                            <th>예약 시작 시간</th>
                             <th>요일</th>
-                            <th>예약 승인 여부</th>
-                            <th>연장</th>
-                            <th>취소</th>
-                            <%
-                                if(session.getAttribute("position").equals("admin")){
-                            %>
-                                <th>승인</th>
-                            <%
-                                }
-                            %>
+                            <th>강의 시작 날짜</th>
+                            <th>예약 종료 날짜</th>
+                            <th>수정</th>
                         </tr>
                         <%
                             if(count > 0){
                                 int number = count - (currentPage - 1) * pageSize;
-                                for(int i=0; i<reservationDtoList.size(); i++){
+                                for(int i=0; i<scheduleDtoList.size(); i++){
                         %>
                         <tr class="reservation">
                             <td><%=number--%></td>
-                            <td><%=reservationDtoList.get(i).getId()%></td>
-                            <td><%=reservationDtoList.get(i).getDate()%></td>
-                            <td><%=reservationDtoList.get(i).getLectureroomNum()%></td>
-                            <td><%=reservationDtoList.get(i).getSeat()%></td>
-                            <td><%=reservationDtoList.get(i).getStartTime()%></td>
-                            <td><%=reservationDtoList.get(i).getEndTime()%></td>
-                            <td><%=reservationDtoList.get(i).getState()%></td>
-                            <td><input type="button" value="연장"> </td>
-                            <td><input type="button" value="취소" onclick="location.href='/member/reservation/deleteReservation.jsp?id=<%=reservationDtoList.get(i).getId()%>&date=<%=reservationDtoList.get(i).getDate()%>&room=<%=reservationDtoList.get(i).getLectureroomNum()%>&seat=<%=reservationDtoList.get(i).getSeat()%>&sTime=<%=reservationDtoList.get(i).getStartTime()%>&eTime=<%=reservationDtoList.get(i).getEndTime()%>'"> </td>
-                            <%
-                                if(session.getAttribute("position").equals("admin")){
-                                    if(reservationDtoList.get(i).getState().equals("대기중")){
-                            %>
-                                        <td><input type="button" value="승인" class="recognizeBtn"> </td>
-                            <%
-                                    }else{
-                            %>
-                                        <td><input type="button" class="recognize" value="승인" disabled="true"> </td>
-                            <%
-                                    }
-                                }
-                            %>
+                            <td><%=scheduleDtoList.get(i).getSchedule_name()%></td>
+                            <td><%=scheduleDtoList.get(i).getSchedule_lectureroom_num()%></td>
+                            <td><%=scheduleDtoList.get(i).getSchedule_class_Stime()%></td>
+                            <td><%=scheduleDtoList.get(i).getSchedule_class_Etime()%></td>
+                            <td><%=weeks[scheduleDtoList.get(i).getSchedule_week()]%></td>
+                            <td><%=scheduleDtoList.get(i).getSchedule_Sdate()%></td>
+                            <td><%=scheduleDtoList.get(i).getSchedule_Edate()%></td>
+                            <td><input type="button" value="수정" onclick="PopUp('/member/scheduleUpdateForm.jsp?name=<%=scheduleDtoList.get(i).getSchedule_name()%>&room=<%=scheduleDtoList.get(i).getSchedule_lectureroom_num()%>&sTime=<%=scheduleDtoList.get(i).getSchedule_class_Stime()%>&eTime=<%=scheduleDtoList.get(i).getSchedule_class_Etime()%>&week=<%=scheduleDtoList.get(i).getSchedule_week()%>&sDate=<%=scheduleDtoList.get(i).getSchedule_Sdate()%>&eDate=<%=scheduleDtoList.get(i).getSchedule_Edate()%>')"></td>
+                            <td><input type="button" value="삭제" onclick="location.href='/member/scheduleDeleteProcess.jsp?name=<%=scheduleDtoList.get(i).getSchedule_name()%>&room=<%=scheduleDtoList.get(i).getSchedule_lectureroom_num()%>&sTime=<%=scheduleDtoList.get(i).getSchedule_class_Stime()%>&eTime=<%=scheduleDtoList.get(i).getSchedule_class_Etime()%>&week=<%=scheduleDtoList.get(i).getSchedule_week()%>&sDate=<%=scheduleDtoList.get(i).getSchedule_Sdate()%>&eDate=<%=scheduleDtoList.get(i).getSchedule_Edate()%>'"></td>
                         </tr>
                         <%
                                 }
@@ -172,10 +152,9 @@
 
                                         if(startPage > pageBlock){
                                 %>
-                                <a href="reservationCheck.jsp?pageNum=<%=startPage - 10%>">[이전]</a>
+                                <a href="classModifyForm.jsp?pageNum=<%=startPage - 10%>">[이전]</a>
                                 <%
                                     }
-
                                     for(int i=startPage; i <= endPage; i++){ // 페이지 블록 번호
                                         if(i == currentPage){ // 현재 페이지에는 링크를 설정하지 않음
                                 %>
@@ -183,13 +162,13 @@
                                 <%
                                 }else{ // 현재 페이지가 아닌 경우 링크 설정
                                 %>
-                                <a href="reservationCheck.jsp?pageNum=<%=i%>">[<%=i %>]</a>
+                                <a href="classModifyForm.jsp?pageNum=<%=i%>">[<%=i %>]</a>
                                 <%
                                         }
                                     } // for end
                                     if(endPage < pageCount){ // 현재 블록의 마지막 페이지보다 페이지 전체 블록수가 클경우 다음 링크 생성
                                 %>
-                                <a href="reservationCheck.jsp?pageNum=<%=startPage + 10 %>">[다음]</a>
+                                <a href="classModifyForm.jsp?pageNum=<%=startPage + 10 %>">[다음]</a>
                                 <%
                                         }
                                     }
@@ -251,6 +230,8 @@
         sendPost('reservationRecognize.jsp', tdArr)
     });
 
-
+    function PopUp(url){
+        open(url,'pop01' ,'top=10, left=10, width=800, height=800, status=no, menubar=no, toolbar=no, resizable=no');
+    }
 </script>
 </html>
