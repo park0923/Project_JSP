@@ -30,7 +30,7 @@
             width: 100%;
             height: 60px;
             display: flex;
-            justify-content: space-between;
+            justify-content: end;
             /*align-items: center;*/
             /*padding: 0 10px;*/
         }
@@ -69,9 +69,6 @@
 <body>
 
 <div class="topbar">
-    <div class="toggle">
-        <ion-icon name="menu-outline"></ion-icon>
-    </div>
     <div class="user">
         <ul>
             <li>오늘 정리하는 사람: <%=n%></li>
@@ -81,10 +78,6 @@
     </div>
 </div>
 <script>
-    let toggle = document.querySelector('.toggle');
-    let navigation = document.querySelector('.navigation');
-    let main = document.querySelector('.main');
-
     toggle.onclick = function(){
         navigation.classList.toggle('active')
         main.classList.toggle('active')

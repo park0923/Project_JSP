@@ -40,9 +40,37 @@
             top: 5%;
             left: 5%;
             position: absolute;
+            display: flex;
+            flex-direction: column;
             background-color: white;
             text-align: center;
             vertical-align: middle;
+        }
+        .details table
+        {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .details table thead td
+        {
+            font-weight: 600;
+            text-align: center;
+        }
+        .details .inquiryBox table tr
+        {
+            color: var(--black1);
+            text-align: center;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        .details .inquiryBox table tr:last-child
+        {
+            border-bottom: none;
+        }
+        .details .inquiryBox table tr td .view
+        {
+            text-decoration: none;
+            color:  var(--black1);
         }
     </style>
 </head>
