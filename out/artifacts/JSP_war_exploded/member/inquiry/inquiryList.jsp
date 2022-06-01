@@ -110,6 +110,11 @@
             background: var(--blue);
             color: var(--white);
         }
+        .details .inquiryBox table tbody tr:hover:last-child
+        {
+            background: none;
+            color: black;
+        }
         .details .inquiryBox table tr td .view
         {
             text-decoration: none;

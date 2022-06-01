@@ -195,7 +195,7 @@
                     </li>
                     <li class="list">
                         <a href="/member/classInsertForm.jsp">
-                            <span class="icon"><ion-icon name="calendar"></ion-icon></span>
+                            <span class="icon"><ion-icon name="create"></ion-icon></span>
                             <span class="title">강의 정보 입력</span>
                         </a>
                     </li>
@@ -210,7 +210,7 @@
             %>
                     <li class="list">
                         <a href="/member/reservation.jsp">
-                            <span class="icon"><ion-icon name="search"></ion-icon></span>
+                            <span class="icon"><ion-icon name="checkbox"></ion-icon></span>
                             <span class="title">강의실 예약</span>
                         </a>
                     </li>
@@ -219,7 +219,7 @@
             %>
             <li class="list">
                 <a href="/member/reservationCheck.jsp">
-                    <span class="icon"><ion-icon name="chatbox-ellipses"></ion-icon></span>
+                    <span class="icon"><ion-icon name="search"></ion-icon></span>
                     <span class="title">예약 조회</span>
                 </a>
             </li>
