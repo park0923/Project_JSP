@@ -442,4 +442,32 @@ public class ReservationDao {
         }
         return rt;
     }
+
+    public int getState(String id){
+        int rt = 0;
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String query = "SELECT count(*) cnt FROM member WHERE member_state = 'good' AND member_id = ?;";
+        try {
+            conn = DatabaseUtil.getConnection();
+            if (conn == null) return rt;
+            pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, id);
+            rs = pstmt.executeQuery();
+            if(rs.next()){
+                rt = rs.getInt("cnt");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return rt;
+    }
 }
