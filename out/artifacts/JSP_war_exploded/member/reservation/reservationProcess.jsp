@@ -25,39 +25,55 @@
 
     if(Integer.parseInt(endHourArray[0])<=17){
         for(int i=0; i<seatArray.length; i++){
-            if(dao.insertReservationAm(reservationDto, seatArray[i]) == ReservationDao.RESERVATION_SUCCESS){
-                if(i == seatArray.length - 1){
+            if(dao.getState((String) session.getAttribute("id"))>0){
+                if(dao.insertReservationAm(reservationDto, seatArray[i]) == ReservationDao.RESERVATION_SUCCESS){
+                    if(i == seatArray.length - 1){
 %>
-                    <script>
-                        alert("예약 성공 -> 강의실 규칙 및 공지사항 등 주의사항 알리기");
-                        location.href = '../mainForm.jsp';
-                    </script>
+                        <script>
+                            alert("예약 성공 -> 강의실 규칙 및 공지사항 등 주의사항 알리기");
+                            location.href = '../mainForm.jsp';
+                        </script>
 <%
-                }else {
+                    }else {
 %>
                     <script>
                         alert("예약에 실패하였습니다.");
                     </script>
 <%
+                    }
                 }
+            }else {
+%>
+            <script>
+                alert("회원님은 예약 금지 상태입니다.");
+            </script>
+<%
             }
         }
     }else {
         for(int i=0; i<seatArray.length; i++){
-            if(dao.insertReservation(reservationDto,seatArray[i]) == ReservationDao.RESERVATION_SUCCESS){
-                if(i == seatArray.length - 1){
+            if(dao.getState((String) session.getAttribute("id"))>0){
+                if(dao.insertReservation(reservationDto,seatArray[i]) == ReservationDao.RESERVATION_SUCCESS){
+                    if(i == seatArray.length - 1){
 %>
-                    <script>
-                        alert("예약 성공 -> 강의실 규칙 및 공지사항 등 주의사항 알리기");
-                        location.href = '../mainForm.jsp';
-                    </script>
+                        <script>
+                            alert("예약 성공 -> 강의실 규칙 및 공지사항 등 주의사항 알리기");
+                            location.href = '../mainForm.jsp';
+                        </script>
 <%
-                }
-            }else {
+                     }
+                }else {
 %>
                 <script>
                     alert("예약에 실패하였습니다.");
                 </script>
+<%
+                }
+            }else {
+%>
+            <script>
+                alert("회원님은 예약 금지 상태입니다.");
+            </script>
 <%
             }
         }
