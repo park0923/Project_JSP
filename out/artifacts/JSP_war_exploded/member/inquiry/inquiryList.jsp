@@ -156,18 +156,8 @@
         <%
         }
     }else{
+        boardDtoList = dao.getInquiry(Row, pageSize, (String) session.getAttribute("id"));
         count = dao.getIdCount((String) session.getAttribute("id"));
-        if(count > 0){
-            boardDtoList = dao.getInquiry(Row, pageSize, (String) session.getAttribute("id"));
-            System.out.println(boardDtoList.get(0).getBoard_inquiry());
-    }else{
-        %>
-            <script>
-                alert("예약이 없습니다.")
-                history.back();
-            </script>
-        <%
-        }
     }
 %>
 <div class="container">
@@ -213,12 +203,18 @@
                             <td><%=boardDtoList.get(i).getB0ard_studentID()%></td>
                             <td><%=boardDtoList.get(i).getCreate_date()%></td>
                             <td><%=boardDtoList.get(i).getBoard_classfication()%></td>
+                            <%
+                                if(session.getAttribute("id").equals(boardDtoList.get(i).getB0ard_studentID()) || session.getAttribute("position").equals("admin")){
+                            %>
                             <td>
                                 <a href="/member/inquiry/inquiryupdate.jsp?id=<%=boardDtoList.get(i).getBoard_index()%>" class="btn_up">수정</a>
                             </td>
                             <td>
                                 <a href="/member/inquiry/inquirydeleteprocess.jsp?id=<%=boardDtoList.get(i).getBoard_index()%>" class="btn_del">삭제</a>
                             </td>
+                            <%
+                                }
+                            %>
                         </tr>
                         <%
                             }

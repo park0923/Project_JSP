@@ -119,7 +119,6 @@
                 <div class="inquiryBox">
                     <div class="cardHeader">
                         <h2>공지사항</h2>
-                        <a href="/member/inquiry/inquiry.jsp" class="btn">글쓰기</a>
                     </div>
                     <table>
                         <thead>

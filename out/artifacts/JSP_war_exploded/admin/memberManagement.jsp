@@ -210,7 +210,8 @@
                             <td><input type="text" value="<%=userDtoList.get(i).getPosition()%>" readonly></td>
                             <td><input type="text" value="<%=userDtoList.get(i).getState()%>" readonly></td>
                             <td><input type="text" value="<%=userDtoList.get(i).getWarning()%>" readonly></td>
-                            <td><button class="custom-btn2 btn-2" style="width: 200px; height: 40px" type="submit">수정</button></td>                        </tr>
+                            <td><button class="custom-btn2 btn-2" style="width: 200px; height: 40px" type="submit">수정</button></td>
+                        </tr>
                     </form>
                     <%
                         }

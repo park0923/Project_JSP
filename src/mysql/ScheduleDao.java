@@ -190,81 +190,173 @@ public class ScheduleDao {
         return rt;
     }
 
-//    public List<ScheduleDto> getSchedulePaging(int startRow, int endRow){
-//        Connection conn = null;
-//        PreparedStatement pstmt = null;
-//        String query = "";
-//        ResultSet rs = null;
-//        ArrayList<ReservationDto> list = new ArrayList<>();
-//        try {
-//            conn = DatabaseUtil.getConnection();
-//            if (conn == null) return null;
-//            if(id.equals("")){
-//                query = "SELECT * FROM reservation ORDER BY reservation_date DESC, reservation_state LIMIT ?, ?";
-//                pstmt = conn.prepareStatement(query);
-//                pstmt.setInt(1, startRow);
-//                pstmt.setInt(2, endRow);
-//            }else {
-//                query = "SELECT * FROM reservation WHERE reservation_id=? ORDER BY reservation_date DESC, reservation_state LIMIT ?, ?";
-//                pstmt = conn.prepareStatement(query);
-//                pstmt.setString(1, id);
-//                pstmt.setInt(2, startRow);
-//                pstmt.setInt(3, endRow);
-//            }
-//            rs = pstmt.executeQuery();
-//
-//            while(rs.next()){
-//                ReservationDto dto = new ReservationDto.Builder()
-//                        .id(rs.getString("reservation_id"))
-//                        .lectureroomNum(rs.getString("reservation_lectureroom_num"))
-//                        .startTime(rs.getString("reservation_startTime"))
-//                        .endTime(rs.getString("reservation_endTime"))
-//                        .seat(rs.getString("reservation_seat"))
-//                        .date(rs.getString("reservation_date"))
-//                        .state(rs.getString("reservation_state"))
-//                        .build();
-//                list.add(dto);
-//            }
-//            return list;
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        } finally {
-//            try {
-//                if (rs != null) rs.close();
-//                if (pstmt != null) pstmt.close();
-//                if (conn != null) conn.close();
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        return null;
-//    }
-//
-//    public int getCount(){
-//        int count = 0;
-//        Connection conn = null;
-//        PreparedStatement pstmt = null;
-//        ResultSet rs = null;
-//        String sql = "SELECT count(*) FROM reservation";
-//        try {
-//            conn = DatabaseUtil.getConnection();
-//            pstmt = conn.prepareStatement(sql);
-//            rs = pstmt.executeQuery();
-//            if(rs.next()){
-//                count = rs.getInt(1);
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
-//            try {
-//                if (rs != null) rs.close();
-//                if (pstmt != null) pstmt.close();
-//                if (conn != null) conn.close();
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        return count; // 총 레코드 수 리턴
-//    }
+    public List<ScheduleDto> getSchedulePaging(int startRow, int endRow){
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        String query = "";
+        ResultSet rs = null;
+        ArrayList<ScheduleDto> list = new ArrayList<>();
+        try {
+            conn = DatabaseUtil.getConnection();
+            if (conn == null) return null;
+            query = "SELECT * FROM schedule ORDER BY schedule_Sdate DESC LIMIT ?, ?";
+            pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, startRow);
+            pstmt.setInt(2, endRow);
+            rs = pstmt.executeQuery();
 
+            while(rs.next()){
+                ScheduleDto dto = new ScheduleDto.Builder()
+                        .schedule_name(rs.getString("schedule_name"))
+                        .schedule_lectureroom_num(rs.getString("schedule_lectureroom_num"))
+                        .schedule_class_Stime(rs.getString("schedule_class_Stime"))
+                        .schedule_class_Etime(rs.getString("schedule_class_Etime"))
+                        .schedule_week(rs.getInt("schedule_week"))
+                        .schedule_Sdate(rs.getString("schedule_Sdate"))
+                        .schedule_Edate(rs.getString("schedule_Edate"))
+                        .build();
+                list.add(dto);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    public int getCount(){
+        int count = 0;
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String sql = "SELECT count(*) FROM schedule";
+        try {
+            conn = DatabaseUtil.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+            if(rs.next()){
+                count = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return count; // 총 레코드 수 리턴
+    }
+
+    public int deleteSchedule(int index){
+        int rt = 0;
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        String query = "DELETE FROM schedule WHERE schedule_index =?";
+
+        try {
+            conn = DatabaseUtil.getConnection();
+
+            if (conn == null) return rt;
+            pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, index);
+            pstmt.executeUpdate();
+            rt = SCHEDULE_DELETE_SUCCESS;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return rt;
+    }
+
+    public int updateSchedule(String name, String room, String sTime, String eTime, String week, String sDate, String eDate, int index){
+        int rt = 0;
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String query = "UPDATE schedule SET schedule_name = ? , schedule_lectureroom_num=? , schedule_class_Stime = ? , schedule_class_Etime = ? , schedule_week = ? , schedule_Sdate = ? , schedule_Edate = ? " +
+                "WHERE schedule_index = ?";
+
+        try {
+            conn = DatabaseUtil.getConnection();
+            if (conn == null) return rt;
+            pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, name);
+            pstmt.setString(2, room);
+            pstmt.setString(3, sTime);
+            pstmt.setString(4, eTime);
+            pstmt.setString(5, week);
+            pstmt.setString(6, sDate);
+            pstmt.setString(7, eDate);
+            pstmt.setInt(8, index);
+            pstmt.executeUpdate();
+            rt = SCHEDULE_UPDATE_SUCCESS;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return rt;
+    }
+
+    public int selectScheduleIndex(String name, String room, String sTime, String eTime, String week, String sDate, String eDate){
+        int rt = 0;
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String query = "SELECT schedule_index from schedule WHERE schedule_name = ? AND schedule_lectureroom_num=? " +
+                "AND schedule_class_Stime = ? AND schedule_class_Etime = ? AND schedule_week = ? AND schedule_Sdate = ? AND schedule_Edate = ?";
+        try {
+            conn = DatabaseUtil.getConnection();
+            if (conn == null) return rt;
+            pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, name);
+            pstmt.setString(2, room);
+            pstmt.setString(3, sTime);
+            pstmt.setString(4, eTime);
+            pstmt.setString(5, week);
+            pstmt.setString(6, sDate);
+            pstmt.setString(7, eDate);
+            rs = pstmt.executeQuery();
+            if(rs.next()){
+                rt = rs.getInt("schedule_index");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return rt;
+    }
 }

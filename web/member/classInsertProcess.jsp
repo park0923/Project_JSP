@@ -26,9 +26,10 @@
 <%
     }else {
 %>
-        <script>
-            alert("강의 등록에 실패하였습니다.");
-        </script>
+    <script>
+        alert("강의 등록에 실패하였습니다.");
+        location.href = 'mainForm.jsp';
+    </script>
 <%
     }
 %>
