@@ -32,13 +32,16 @@
     int week = calendar.get(Calendar.DAY_OF_WEEK);
 System.out.println(seat+" "+ Integer.parseInt(ssTime[0])+" "+  room+" "+  week);
     ReservationDao dao = ReservationDao.getInstance();
-    int k = dao.getExtendTime(seat, Integer.parseInt(ssTime[0]), room, week);
-    System.out.println(k-Integer.parseInt(eeTime[0]));
+    int timeC = dao.getExtendTime(seat, Integer.parseInt(ssTime[0]), room, week);
+    if(timeC==0 || timeC-Integer.parseInt(eeTime[0])<0) {
+        timeC=24;
+    }
+    int timeExtend = timeC-Integer.parseInt(eeTime[0]);
 
 %>
-  <input type="text" value="<%=k-Integer.parseInt(eeTime[0])%>"> 시간 연장가능
+  <input type="text" value="<%=timeExtend%>"> 시간 연장가능
   <form action="reservationExtendProcess.jsp?seat=<%=seat%>&date=<%=date%>&room=<%=room%>&sTime=<%=sTime%>&eTime=<%=eTime%>" method="post">
-      <input type="number" name="time" min="1" max="<%=k-Integer.parseInt(eeTime[0])%>">
+      <input type="number" name="time" min="1" max="<%=timeExtend%>">
       <input type="submit" value="연장하기">
   </form>
 
