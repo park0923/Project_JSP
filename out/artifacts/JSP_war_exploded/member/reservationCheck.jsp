@@ -15,21 +15,20 @@
     <style>
         .details .reservationCheck{
             position: relative;
-            width: 1300px;
-            height: 700px;
+            width: 100%;
+            height: 100%;
             padding: 30px;
             margin-top: -30px;
-            margin-left: 50px;
             border-radius: 20px;
             box-shadow: 0 7px 25px rgba(0,0,0,0.5);
         }
         table{
             border: 2px solid #d2d2d2;
             border-collapse: collapse;
-            font-size: 0.9em;
+            font-size: 0.8em;
             text-align: center;
-            width: 1200px;
-            margin-left: 20px;
+            width: 100%;
+
         }
         th, td{
             border: 1px solid #d2d2d2;
@@ -47,6 +46,34 @@
             margin-bottom: 30px;
             font-size: xx-large;
             font-weight: bold;
+        }
+        .checkBtn{
+            padding: 5px 10px;
+            background: var(--blue);
+            color: var(--white);
+            border-radius: 6px;
+            border: solid 0px;
+        }
+        .reservationCancel{
+            padding: 5px 10px;
+            background: var(--blue);
+            color: var(--white);
+            border-radius: 6px;
+            border: solid 0px;
+        }
+        .recognizeBtn{
+            padding: 5px 10px;
+            background: var(--blue);
+            color: var(--white);
+            border-radius: 6px;
+            border: solid 0px;
+        }
+        .recognize{
+            padding: 5px 10px;
+            background: gray;
+            color: var(--white);
+            border-radius: 6px;
+            border: solid 0px;
         }
     </style>
 </head>
@@ -147,8 +174,8 @@
                             <td><%=reservationDtoList.get(i).getEndTime()%></td>
                             <td><%=reservationDtoList.get(i).getState()%></td>
 <%--                            <td><input type="button" value="연장" class="checkBtn"> </td>--%>
-                            <td><input type="button" value="연장" class="checkBtn" onclick="extendTimePopUp('reservationExtend.jsp?date=<%=reservationDtoList.get(i).getDate()%>&room=<%=reservationDtoList.get(i).getLectureroomNum()%>&seat=<%=reservationDtoList.get(i).getSeat()%>&sTime=<%=reservationDtoList.get(i).getStartTime()%>&eTime=<%=reservationDtoList.get(i).getEndTime()%>')"> </td>
-                            <td><input type="button" value="취소" onclick="location.href='/member/reservation/deleteReservation.jsp?id=<%=reservationDtoList.get(i).getId()%>&date=<%=reservationDtoList.get(i).getDate()%>&room=<%=reservationDtoList.get(i).getLectureroomNum()%>&seat=<%=reservationDtoList.get(i).getSeat()%>&sTime=<%=reservationDtoList.get(i).getStartTime()%>&eTime=<%=reservationDtoList.get(i).getEndTime()%>'"> </td>
+                            <td><input type="button" value="연장" class="checkBtn" > </td>
+                            <td><input type="button" value="취소" class="reservationCancel" onclick="location.href='/member/reservation/deleteReservation.jsp?id=<%=reservationDtoList.get(i).getId()%>&date=<%=reservationDtoList.get(i).getDate()%>&room=<%=reservationDtoList.get(i).getLectureroomNum()%>&seat=<%=reservationDtoList.get(i).getSeat()%>&sTime=<%=reservationDtoList.get(i).getStartTime()%>&eTime=<%=reservationDtoList.get(i).getEndTime()%>'"> </td>
                             <%
                                 if(session.getAttribute("position").equals("admin")){
                                     if(reservationDtoList.get(i).getState().equals("대기중")){
@@ -197,7 +224,7 @@
                                 <%
                                 }else{ // 현재 페이지가 아닌 경우 링크 설정
                                 %>
-                                <a href="reservationCheck.jsp?pageNum=<%=i%>">[<%=i %>]</a>
+                                <a href="reservationCheck.jsp?pageNum=<%=i%>" style="color: black; text-decoration: none">[<%=i %>]</a>
                                 <%
                                         }
                                     } // for end
@@ -241,7 +268,7 @@
         form.submit();
     }
 
-    $(".recognizeBtn").click(function (){
+    $(".checkBtn").click(function (){
         var checkBtn = $(this);
         var tdArr = new Array();
 
@@ -256,13 +283,41 @@
         var seat = td.eq(4).text();
         var sTime = td.eq(5).text();
         var eTime = td.eq(6).text();
+        var url = 'reservationExtend.jsp?date='+date+'&room='+room+'&seat='+seat+'&sTime='+sTime+'&eTime='+eTime
+
+        date = date.split("-");
+        sTime = sTime.split(":");
+        eTime = eTime.split(":");
 
         console.log(id, date, room, seat, sTime, eTime);
         td.each(function(i){
             tdArr.push(td.eq(i).text());
         });
         console.log(tdArr);
-        sendPost('reservationRecognize.jsp', tdArr)
+
+        var now = new Date();
+        var year = now.getFullYear();
+        var month = now.getMonth()+1;
+        var day = now.getDate();
+        var hour = now.getHours();
+        var minutes = now.getMinutes();
+
+        var date1 = new Date(year, month, day, hour, minutes);
+        var date3 = new Date(date[0], date[1], date[2], eTime[0], eTime[1]);
+
+        var date2 = new Date(date[0], date[1], date[2], sTime[0], sTime[1]);
+        var chMin = (date1.getTime() - date2.getTime())
+        var elMin = (date3.getTime() - date1.getTime())/1000/60;
+
+
+        if(elMin>0 && chMin>0){
+            alert(elMin+"분 남았습니다.");
+            open(url,'pop01' ,'top=10, left=10, width=800, height=800, status=no, menubar=no, toolbar=no, resizable=no');
+        }else if(chMin<0){
+            alert("아직 예약이 시작되지않았습니다.");
+        }else{
+            alert("확인 못함");
+        }
     });
 
     function extendTimePopUp(url){

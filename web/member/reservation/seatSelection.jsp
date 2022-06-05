@@ -19,6 +19,97 @@
     <title>강의실 예약</title>
     <link rel="stylesheet" type="text/css" href="../main.css">
     <link rel="stylesheet" type="text/css" href="/member/reservation/seat.css">
+    <style>
+        .details{
+            top: 70px;
+        }
+        .details .screen{
+            position: relative;
+            width: 700px;
+            height: 500px;
+            padding: 30px;
+            margin-top: 50px;
+            margin-left: 30px;
+            border-radius: 20px;
+            box-shadow: 0 7px 25px rgba(0,0,0,0.5);
+            display: inline-block;
+        }
+        .screen{
+            justify-content: center;
+        }
+        .screen h1{
+            justify-content: center;
+            margin-left: 20px;
+        }
+        .check{
+            padding: 30px;
+            margin-top: 20px;
+            text-align: end;
+            margin-right: 70px;
+        }
+        .case{
+            display: inline-block;
+            padding: 5px;
+            margin-left: 20px;
+
+
+        }
+        .btn_seat{
+            padding: 10px;
+            justify-content: center;
+            margin-left: 20px;
+        }
+        .reservation_btn{
+            position: relative;
+            padding: 5px 10px;
+            background: var(--blue);
+            text-decoration: none;
+            color: var(--white);
+            border-radius: 6px;
+            margin-top: 10px;
+            border: solid 0px;
+        }
+        .back_btn{
+            position: relative;
+            padding: 5px 10px;
+            background: var(--blue);
+            text-decoration: none;
+            color: var(--white);
+            border-radius: 6px;
+            margin-top: 10px;
+            border: solid 0px;
+        }
+        .cancel_btn{
+            position: relative;
+            padding: 5px 10px;
+            background: var(--blue);
+            text-decoration: none;
+            color: var(--white);
+            border-radius: 6px;
+            margin-top: 10px;
+            border: solid 0px;
+        }
+        .check_1{
+            display: inline-block;
+        }
+        .check_2{
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .reservation_btn_bundle{
+            justify-items: right;
+            margin-left: 290px;
+        }
+        .li_1{
+            display: inline-block;
+        }
+        .li_2{
+            display: inline-block;
+        }
+        .li_3{
+            display: inline-block;
+        }
+    </style>
 </head>
 <script type="text/javascript" src="reservation/selectTime.js"></script>
 <body>
@@ -62,19 +153,19 @@
         </div>
         <div class="contents">
             <div class="details">
-                <section id="view1">
+                <section id="view1" class="screen">
                     <h1>칠판</h1>
                     <br>
                     <ul class="case">
-                        <li>
+                        <li class="li_3">
                             <button></button>
                             예약 가능
                         </li>
-                        <li>
+                        <li class="li_1">
                             <button style="background-color: #287bff" ></button>
                             예약 선택
                         </li>
-                        <li>
+                        <li class="li_2">
                             <button style="background-color: red"></button>
                             예약 불가
                         </li>
@@ -84,7 +175,7 @@
                         <button class="seat" id="1" value="0"></button>
                         <button class="seat" id="2" value="0"></button>
                         <button class="seat" id="3" value="0"></button>
-                        <button class="seat" id="4" value="0"></button>
+                        <button class="seat" id="4" value="0" style="margin-right: 25px"></button>
                         <button class="seat" id="5" value="0"></button>
                         <button class="seat" id="6" value="0"></button>
                         <button class="seat" id="7" value="0"></button>
@@ -93,7 +184,7 @@
                         <button class="seat" id="9" value="0"></button>
                         <button class="seat" id="10" value="0"></button>
                         <button class="seat" id="11" value="0"></button>
-                        <button class="seat" id="12" value="0"></button>
+                        <button class="seat" id="12" value="0" style="margin-right: 25px"></button>
                         <button class="seat" id="13" value="0"></button>
                         <button class="seat" id="14" value="0"></button>
                         <button class="seat" id="15" value="0"></button>
@@ -102,7 +193,7 @@
                         <button class="seat" id="17" value="0" ></button>
                         <button class="seat" id="18" value="0" ></button>
                         <button class="seat" id="19" value="0" ></button>
-                        <button class="seat" id="20" value="0" ></button>
+                        <button class="seat" id="20" value="0" style="margin-right: 25px" ></button>
                         <button class="seat" id="21" value="0" ></button>
                         <button class="seat" id="22" value="0" ></button>
                         <button class="seat" id="23" value="0" ></button>
@@ -111,7 +202,7 @@
                         <button class="seat" id="25" value="0" ></button>
                         <button class="seat" id="26" value="0" ></button>
                         <button class="seat" id="27" value="0" ></button>
-                        <button class="seat" id="28" value="0" ></button>
+                        <button class="seat" id="28" value="0" style="margin-right: 25px"></button>
                         <button class="seat" id="29" value="0" ></button>
                         <button class="seat" id="30" value="0" ></button>
                         <button class="seat" id="31" value="0" ></button>
@@ -120,7 +211,7 @@
                         <button class="seat" id="33" value="0" ></button>
                         <button class="seat" id="34" value="0" ></button>
                         <button class="seat" id="35" value="0" ></button>
-                        <button class="seat" id="36" value="0" ></button>
+                        <button class="seat" id="36" value="0" style="margin-right: 25px"></button>
                         <button class="seat" id="37" value="0" ></button>
                         <button class="seat" id="38" value="0" ></button>
                         <button class="seat" id="39" value="0" ></button>
@@ -128,21 +219,30 @@
                         <br>
                     </div>
 
-                    <form id="frm" name="seatForm" method="post" action="reservationProcess.jsp">
-                        강의실:
-                        <input type="text" name="lectureRoom" value="<%= roomNum%>" readonly>
-                        날짜:
-                        <input type="text" name="date" value="<%= request.getParameter("date")%>" readonly>
-                        <br>
-                        시간:
-                        <input type="text" id="time" name="startTime" value="<%= sTime%> ~ <%= eTime%>" readonly>
-                        <input type="text" id="person" value="<%= request.getParameter("person")%>" readonly>
-                        <input type="hidden" name="seatList" readonly>
+                    <div class="check">
+                        <form id="frm" name="seatForm" method="post" action="reservationProcess.jsp">
+                            <div class="check_1">
+                                강의실:
+                                <input type="text" name="lectureRoom" value="<%= roomNum%>" readonly>
+                                날짜:
+                                <input type="text" name="date" value="<%= request.getParameter("date")%>" readonly>
+                            </div>
+                                <br>
+                            <div class="check_2">
+                                시간:
+                                <input type="text" id="time" name="startTime" value="<%= sTime%> ~ <%= eTime%>" readonly>
+                                인원:
+                                <input type="text" id="person" value="<%= request.getParameter("person")%>" readonly>
+                                <input type="hidden" name="seatList" readonly>
+                            </div>
 
-                        <input type="button" value="예약" onclick="confirmCheck()">
-                        <input type="button" onclick="location.href='../reservation.jsp'" value="뒤로가기">
-                        <input type="button" onclick="location.href='../mainForm.jsp'" value="취소">
-                    </form>
+                            <div class="reservation_btn_bundle">
+                                <input type="button" value="예약" onclick="confirmCheck()" class="reservation_btn">
+                                <input type="button" onclick="location.href='../reservation.jsp'" value="뒤로가기" class="back_btn">
+                                <input type="button" onclick="location.href='../mainForm.jsp'" value="취소" class="cancel_btn">
+                            </div>
+                        </form>
+                    </div>
                 </section>
             </div>
             </div>

@@ -470,22 +470,27 @@
     }
 
     function confirmInsert() {
+        if(document.classInsertForm.sDate.value === "" || document.classInsertForm.eDate.value === "0"){
+            alert("시간을 선택하세요.");
+            document.classInsertForm.sDate.focus();
+            return;
+        }
         if(document.classInsertForm.startTime.value === "" || document.classInsertForm.startTime.value === "0"){
             alert("시간을 선택하세요.");
             document.classInsertForm.startTime.focus();
             return;
         }
-        if(document.classInsertForm.lectureRoom.value === ""){
+        if(document.classInsertForm.lectureRoom.value === "" || document.classInsertForm.lectureRoom.value === "0"){
             alert("강의실을 선택하세요.");
             document.classInsertForm.lectureRoom.focus();
             return;
         }
-        if(document.classInsertForm.className.value === ""){
+        if(document.classInsertForm.className.value.trim() === ""){
             alert("강의 이름을 입력하세요.");
             document.classInsertForm.className.focus();
             return;
         }
-        if(document.classInsertForm.week.value === ""){
+        if(document.classInsertForm.week.value === "" || document.classInsertForm.week.value === "0"){
             alert("요일을 선택하세요.");
             document.classInsertForm.week.focus();
             return;

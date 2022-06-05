@@ -167,12 +167,12 @@ public class ReservationDao {
             conn = DatabaseUtil.getConnection();
             if (conn == null) return null;
             if(id.equals("")){
-                query = "SELECT * FROM reservation ORDER BY reservation_date DESC, reservation_state LIMIT ?, ?";
+                query = "SELECT * FROM reservation ORDER BY reservation_date DESC, reservation_startTime DESC, reservation_endTime DESC, reservation_state LIMIT ?, ?";
                 pstmt = conn.prepareStatement(query);
                 pstmt.setInt(1, startRow);
                 pstmt.setInt(2, endRow);
             }else {
-                query = "SELECT * FROM reservation WHERE reservation_id=? ORDER BY reservation_date DESC, reservation_state LIMIT ?, ?";
+                query = "SELECT * FROM reservation WHERE reservation_id=? ORDER BY reservation_date DESC, reservation_startTime DESC, reservation_endTime DESC, reservation_state LIMIT ?, ?";
                 pstmt = conn.prepareStatement(query);
                 pstmt.setString(1, id);
                 pstmt.setInt(2, startRow);

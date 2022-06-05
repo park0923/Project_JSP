@@ -10,7 +10,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     UserDao dao = UserDao.getInstance();
-    String id = (String) session.getAttribute("id");
     UserDto user = new UserDto.Builder()
             .id(request.getParameter("id"))
             .pw(request.getParameter("pw"))
@@ -21,7 +20,7 @@
             .state(request.getParameter("state"))
             .warning(request.getParameter("warning"))
             .build();
-    if(dao.adminUpdateUser(id, user) == UserDao.USER_UPDATE_SUCCESS){
+    if(dao.adminUpdateUser(request.getParameter("id"), user) == UserDao.USER_UPDATE_SUCCESS){
 %>
         <script>
             alert("회원정보 수정 완료");

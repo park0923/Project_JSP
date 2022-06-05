@@ -17,7 +17,7 @@
         .details .classroomLookUp{
             position: relative;
             width: 900px;
-            height: 750px;
+            height: 850px;
             padding: 30px;
             margin-top: -30px;
             margin-left: 200px;
@@ -29,7 +29,7 @@
             border-collapse: collapse;
             font-size: 0.9em;
             text-align: center;
-
+            margin-left: 80px;
         }
         th, td{
             border: 1px solid #d2d2d2;
@@ -43,6 +43,10 @@
         td {
             width: 90px;
             height: 60px;
+        }
+        .reservation_title{
+            color:#2c4557;
+            margin:10px;
         }
     </style>
 </head>
@@ -136,14 +140,18 @@
         <div class="contents">
             <div class="details">
                 <div class="classroomLookUp">
-                <select onChange="change(this.options[this.selectedIndex].value)" style="margin-right: 20px" >
-                    <option selected>강의실 선택</option>
-                    <option value="selectBox01">915</option>
+                    <div class="reservation_title">
+                        <h1>강의실 조회</h1>
+                        <hr/>
+                    </div>
+                    <div style="display: flex; flex-direction: row">
+                <select onChange="change(this.options[this.selectedIndex].value)" style="margin-right: 20px; display: inline-block; height: 20px" >
+                    <option value="selectBox01" selected>915</option>
                     <option value="selectBox02">916</option>
                     <option value="selectBox03">918</option>
                     <option value="selectBox04">911</option>
                 </select>
-                <table id="view1" style="display: none; border: solid 0px" >
+                <table id="view1" style="border: solid 0px" >
                     <tr>
                         <td></td><td>월</td><td>화</td><td>수</td><td>목</td><td>금</td>
                     </tr>
@@ -219,6 +227,7 @@
                         }
                     %>
                 </table>
+                    </div>
                 </div>
             </div>
         </div>
