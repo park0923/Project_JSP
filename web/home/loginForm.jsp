@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
   if (session.getAttribute("isLogin") != null) {
-    pageContext.forward("main.jsp");
+    pageContext.forward("mainForm.jsp");
   }
 %>
 <html>

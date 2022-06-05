@@ -64,15 +64,25 @@
             color: var(--black1);
             text-decoration: none;
         }
+        .user_1{
+            margin-right: 850px;
+        }
+        .user{
+            margin-top: 10px ;
+        }
     </style>
 </head>
 <body>
 
 <div class="topbar">
     <div class="user">
-        <ul>
+        <ul style="justify-content: left; display: inline-block" class="user_1">
             <li>오늘 정리하는 사람: <%=n%></li>
-            <li> <%=session.getAttribute("name")%></li>
+        </ul>
+        <ul style="justify-content: right; display: inline-block" class="user_2">
+            <li> <%=session.getAttribute("id")%></li>
+        </ul>
+        <ul style="justify-content: right; display: inline-block" class="user_3">
             <li><a href="/home/logout.jsp">로그아웃</a></li>
         </ul>
     </div>

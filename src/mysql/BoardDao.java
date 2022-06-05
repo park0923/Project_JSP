@@ -67,10 +67,10 @@ public class BoardDao {
             if (conn == null) return rt;
             pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, getNoticeId());
-            pstmt.setString(2, title);
+            pstmt.setString(2, id);
             pstmt.setString(3, inquiry);
-            pstmt.setString(4, id);
-            pstmt.setString(5, classification);
+            pstmt.setString(4, classification);
+            pstmt.setString(5, title);
             pstmt.setString(6, null);
             pstmt.setString(7, now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
             pstmt.executeUpdate();

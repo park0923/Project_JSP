@@ -21,12 +21,12 @@
     .details .reservationDate{
       position: relative;
       width: 700px;
-      height: 550px;
+      height: 650px;
       padding: 30px;
-      margin-top: 50px;
-      margin-left: 30px;
+      top: -40px;
       border-radius: 20px;
       box-shadow: 0 7px 25px rgba(0,0,0,0.5);
+      text-align: left;
     }
     .reservationHeader h1{
       font-weight: 600;
@@ -92,6 +92,15 @@
       border: solid 0px;
       font-size: initial;
       font-weight: bold;
+    }
+    .team{
+      padding: 5px;
+    }
+    .team h3{
+      margin-bottom: 10px;
+      font-size: initial;
+      margin-left: 6px;
+      margin-top: 15px;
     }
 
   </style>
@@ -192,9 +201,13 @@
           <h3>인원:</h3>
           <input type="number" id="person" name="person" min="1" max="1" step="1" value="1">
           <br>
-            <h3>조별학습 <input type="checkbox" name="team"></h3>
-          <input type="button" value="다음" onclick="confirmTime()" class="selectbtn" style="margin-top: 30px;">
           </div>
+            <div class="team">
+            <h3>조별학습</h3>
+              <input type="checkbox" name="team">
+            </div>
+          <input type="button" value="다음" onclick="confirmTime()" class="selectbtn" style="margin-top: 30px;">
+
           </span>
         </form>
       </div>
