@@ -368,29 +368,56 @@ public class ReservationDao {
 
 
 
-    public int getExtendTime(String seat, int sTime, String room, int week){
+    public int getRTime(String seat, int sTime, String room, String date){
         int rt = 0;
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        String sql = "SELECT MIN(CONVERT(SUBSTR(r.reservation_startTime,1, INSTR(r.reservation_startTime,':')-1), signed integer)) rcnt, MIN(CONVERT(SUBSTR(s.schedule_class_Stime,1, INSTR(s.schedule_class_Stime,':')-1), signed integer)) scnt FROM reservation r, schedule s " +
-                "WHERE reservation_seat =? AND reservation_startTime > ? AND s.schedule_lectureroom_num =? AND s.schedule_week = ?";
+        String sql = "SELECT MIN(CONVERT(SUBSTR(reservation_startTime,1, INSTR(reservation_startTime,':')-1), signed integer)) rcnt FROM reservation " +
+                "WHERE (reservation_seat =? AND reservation_startTime > ? AND reservation_lectureroom_num = ? AND reservation_date = ?)";
         try {
             conn = DatabaseUtil.getConnection();
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, seat);
             pstmt.setInt(2, sTime);
             pstmt.setString(3, room);
-            pstmt.setInt(4, week);
+            pstmt.setString(4, date);
             rs = pstmt.executeQuery();
             if(rs.next()){
                 int r = rs.getInt("rcnt");
+                rt = r;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return rt;
+    }
+
+    public int getScTime(String seat, int sTime, String room, int week){
+        int rt = 0;
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String sql = "SELECT MIN(CONVERT(SUBSTR(schedule_class_Stime,1, INSTR(schedule_class_Stime,':')-1), signed integer)) scnt FROM schedule " +
+                "WHERE schedule_lectureroom_num = ? AND schedule_week = ? AND schedule_class_Stime >?";
+        try {
+            conn = DatabaseUtil.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, room);
+            pstmt.setInt(2, week);
+            pstmt.setInt(3, sTime);
+            rs = pstmt.executeQuery();
+            if(rs.next()){
                 int s = rs.getInt("scnt");
-                if(r>=s){
-                    rt=s;
-                }else {
-                    rt=r;
-                }
+                rt = s;
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -269,13 +269,12 @@
                 <div class="c">
                   <input class="custom-btn2 btn-2" style="width: 200px; height: 40px;" type="button" value="수정" onclick="confirmModify()">
                   <input  class="custom-btn2 btn-2" style="width: 200px; height: 40px;" type="button" value="취소" onclick="location.href='../mainForm.jsp'">
-
-                  <button class="custom-btn2 btn-2" style="width: 200px; height: 40px;" onclick="confirmCheck()">아이디 삭제</button>
-                  <button class="custom-btn2 btn-2"style="width: 200px; height: 40px;" onclick="changePassWordPopUp()">비밀번호 변경</button>
                 </div>
               </div>
             </div>
           </form>
+          <button class="custom-btn2 btn-2" style="width: 200px; height: 40px;" onclick="confirmCheck()">아이디 삭제</button>
+          <button class="custom-btn2 btn-2"style="width: 200px; height: 40px;" onclick="changePassWordPopUp()">비밀번호 변경</button>
         </div>
       </div>
     </div>

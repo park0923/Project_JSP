@@ -19,20 +19,30 @@
 </script>
 <%
 } else {
+    System.out.println(session.getAttribute("id"));
     if (dao.insertUser(user) == UserDao.USER_JOIN_SUCCESS) {
+        if(session.getAttribute("id")==null){
 %>
-<script>
-    alert("회원가입을 성공 했습니다.");
-    location.href = 'loginForm.jsp';
-</script>
+        <script>
+            alert("회원가입을 성공 했습니다.");
+            location.href = '../member/mainForm.jsp';
+        </script>
 <%
-}else{
+        }else if(session.getAttribute("id").equals("admin")){
 %>
-<script>
-    alert("회원가입을 실패 했습니다.");
-    location.href = 'joinform.jsp';
-</script>
+        <script>
+            alert("회원가입을 성공 했습니다.");
+            location.href = 'loginForm.jsp';
+        </script>
 <%
         }
+    }else{
+%>
+    <script>
+        alert("회원가입을 실패 했습니다.");
+        location.href = 'joinform.jsp';
+    </script>
+<%
     }
+}
 %>
