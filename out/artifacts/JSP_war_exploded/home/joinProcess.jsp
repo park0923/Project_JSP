@@ -21,7 +21,7 @@
 <%
 } else {
     System.out.println(session.getAttribute("id"));
-    if (dao.insertUser(id, pw, name, phone, email) == UserDao.USER_JOIN_SUCCESS) {
+    if (dao.insertUser(user) == UserDao.USER_JOIN_SUCCESS) {
         if(session.getAttribute("id")==null){
 %>
         <script>
