@@ -167,7 +167,7 @@
                         <tr>
                             <td><%=number--%></td>
                             <td>
-                                <a class="view" href="inquiryview.jsp?id=<%=boardDtoList.get(i).getBoard_index()%>"><%=boardDtoList.get(i).getBoard_title()%></a>
+                                <a class="view" href="inquiry/inquiryview.jsp?id=<%=boardDtoList.get(i).getBoard_index()%>"><%=boardDtoList.get(i).getBoard_title()%></a>
                             </td>
                             <td><%=boardDtoList.get(i).getB0ard_studentID()%></td>
                             <td><%=boardDtoList.get(i).getCreate_date()%></td>

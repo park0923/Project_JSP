@@ -360,6 +360,24 @@
             alert("확인 못함");
         }
     }
+    $(".recognizeBtn").click(function (){
+        var checkBtn = $(this);
+        var tdArr = new Array();
 
+        var tr = checkBtn.parent().parent();
+        var td = tr.children();
+        var id = td.eq(1).text();
+        var date = td.eq(2).text();
+        var room = td.eq(3).text();
+        var seat = td.eq(4).text();
+        var sTime = td.eq(5).text();
+        var eTime = td.eq(6).text();
+        console.log(id, date, room, seat, sTime, eTime);
+        td.each(function(i){
+            tdArr.push(td.eq(i).text());
+        });
+        console.log(tdArr);
+        sendPost('reservationRecognize.jsp', tdArr)
+    });
 </script>
 </html>
