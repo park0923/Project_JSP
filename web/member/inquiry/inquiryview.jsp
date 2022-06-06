@@ -8,7 +8,7 @@
 <%@ page import="mysql.BoardDao" %>
 <%@ page import="beans.BoardDto" %>
 <%@ page import="mysql.UserDao" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <html>
 <head>
     <title>문의하기</title>
@@ -210,7 +210,7 @@
             </li>
         </ul>
     </div>
-
+    <%request.setCharacterEncoding("utf-8");%>
     <div class="main">
         <div class="topbar">
             <div class="toggle">
