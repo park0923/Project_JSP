@@ -23,14 +23,14 @@
 %>
 <script>
     alert("회원가입을 성공 했습니다.");
-    location.href = 'loginForm.jsp';
+    location.href = history.back();
 </script>
 <%
 }else{
 %>
 <script>
     alert("회원가입을 실패 했습니다.");
-    location.href = 'joinform.jsp';
+    location.href = history.back();
 </script>
 <%
         }

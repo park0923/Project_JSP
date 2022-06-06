@@ -115,7 +115,7 @@
         {
             color: #4682B4;
         }
-        .inputbox .box input[type="reset"]
+        .inputbox .box input[type="button"]
         {
             background: lightskyblue;
             border-radius: 30px;
@@ -126,7 +126,7 @@
             font-weight: 600;
             margin-top: 10px;
         }
-        .inputbox .box input[type="reset"]:hover
+        .inputbox .box input[type="button"]:hover
         {
             color: #4682B4;
         }
@@ -174,7 +174,7 @@
             <div class="inputbox">
                 <div class="box">
                     <input type="submit" value="Sign Up">
-                    <input type="reset" value="Reset">
+                    <input type="button" value="Back" onclick=history.back()>
                 </div>
             </div>
         </form>
