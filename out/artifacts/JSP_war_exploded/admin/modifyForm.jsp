@@ -12,7 +12,7 @@
     UserDao dao = UserDao.getInstance();
     String id = request.getParameter("id");
     UserDto user = dao.getUser(id);
-
+    session.setAttribute("sid",id);
 %>
 <head>
     <link rel="stylesheet" type="text/css" href="/member/main.css">
