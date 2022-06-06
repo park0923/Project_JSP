@@ -9,6 +9,8 @@
 <%@ page import="beans.UserDto" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
+    request.setCharacterEncoding("utf-8");
+    String sid = (String) session.getAttribute("sid");
     UserDao dao = UserDao.getInstance();
     UserDto user = new UserDto.Builder()
             .id(request.getParameter("id"))
@@ -20,7 +22,7 @@
             .state(request.getParameter("state"))
             .warning(request.getParameter("warning"))
             .build();
-    if(dao.adminUpdateUser(request.getParameter("id"), user) == UserDao.USER_UPDATE_SUCCESS){
+    if(dao.adminUpdateUser(sid, user) == UserDao.USER_UPDATE_SUCCESS){
 %>
         <script>
             alert("회원정보 수정 완료");
