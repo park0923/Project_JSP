@@ -396,7 +396,7 @@
                                         </li>
                                         <li class="item">
                                             <select name="week"style="padding-right: 26px; width:290px;">
-                                                <option >요일 선택</option>
+                                                <option value="0">요일 선택</option>
                                                 <option value="2">월</option>
                                                 <option value="3">화</option>
                                                 <option value="4">수</option>
