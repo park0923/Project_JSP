@@ -18,6 +18,8 @@
     String inquiry = request.getParameter("inquiry");
     String id = (String) session.getAttribute("id");
     String classification = "";
+    System.out.println(title);
+    System.out.println(inquiry);
     if(udto.getPosition().equals("user")){
         classification = "inquiry";
     }
