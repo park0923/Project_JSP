@@ -107,7 +107,17 @@
         <div class="cardBox">
             <div class="card">
                 <div>
+                    <%
+                        if(session.getAttribute("position").equals("admin")){
+                    %>
+                    <div onclick="location.href='/member/classInsertForm.jsp'" class="cardName">강의 등록</div>
+                    <%
+                        }else{
+                    %>
                     <div onclick="location.href='/member/reservation.jsp'" class="cardName">강의실 예약</div>
+                    <%
+                        }
+                    %>
                 </div>
                 <div class="iconBx">
                     <ion-icon name="today"></ion-icon>
