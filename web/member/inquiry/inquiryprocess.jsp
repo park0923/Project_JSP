@@ -5,11 +5,12 @@
   Time: 오후 6:32
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8"%>
 <%@ page import="mysql.BoardDao" %>
 <%@ page import="mysql.UserDao" %>
 <%@ page import="beans.UserDto" %>
 <%
+    request.setCharacterEncoding("utf-8");
     UserDao udao = UserDao.getInstance();
     UserDto udto = udao.getUser((String) session.getAttribute("id"));
     BoardDao bdao = BoardDao.getInstance();
@@ -17,6 +18,8 @@
     String inquiry = request.getParameter("inquiry");
     String id = (String) session.getAttribute("id");
     String classification = "";
+    System.out.println(title);
+    System.out.println(inquiry);
     if(udto.getPosition().equals("user")){
         classification = "inquiry";
     }
