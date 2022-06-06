@@ -5,6 +5,9 @@
   Time: 오후 2:44
   To change this template use File | Settings | File Templates.
 --%>
+<%
+    request.setCharacterEncoding("utf-8");
+%>
 <%@ page import="mysql.UserDao" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="user" class="beans.UserDto"/>

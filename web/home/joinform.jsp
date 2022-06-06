@@ -5,7 +5,7 @@
   Time: 오전 12:31
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <html>
 <head>
     <script src="../member/form.js"></script>
@@ -173,7 +173,7 @@
             </div>
             <div class="inputbox">
                 <div class="box">
-                    <input type="submit" value="Sign Up">
+                    <input type="button" value="Sign Up" onclick="confirmJoin2()">
                     <input type="button" value="Back" onclick=history.back()>
                 </div>
             </div>
@@ -182,4 +182,14 @@
 </body>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script>
+    function confirmJoin2() {
+        if(document.join_form.name.value === ""){
+            alert("제목을 입력하세요.");
+            document.join_form.name.focus();
+            return;
+        }
+        document.join_form.submit();
+    }
+</script>
 </html>
