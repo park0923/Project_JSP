@@ -5,9 +5,10 @@
   Time: 오후 7:34
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8"%>
 <%@ page import="mysql.BoardDao" %>
 <%@ page import="beans.BoardDto" %>
+
 <html>
 <head>
     <title>문의하기</title>
@@ -174,6 +175,7 @@
         <div class="header">
             <%@ include file="../../header.jsp" %>
         </div>
+        <%request.setCharacterEncoding("utf-8");%>
         <div class="contents">
             <div class="details">
                 <div class="title">

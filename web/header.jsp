@@ -8,8 +8,9 @@
 <%@ page import="java.util.Date" %>
 <%@ page import="mysql.ReservationDao" %>
 <%@ page import="java.text.SimpleDateFormat" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8"%>
 <%
+    request.setCharacterEncoding("utf-8");
     ReservationDao r = ReservationDao.getInstance();
     Date d = new Date();
     SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");

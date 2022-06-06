@@ -5,7 +5,7 @@
   Time: 오전 10:47
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <html>
 <head>
     <title>문의하기</title>
@@ -101,6 +101,7 @@
 </head>
 <body>
 <%
+    request.setCharacterEncoding("utf-8");
     if (session.getAttribute("isLogin") == null) {
 %>
 <script>
