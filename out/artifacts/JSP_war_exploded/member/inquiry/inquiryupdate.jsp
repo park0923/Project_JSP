@@ -215,6 +215,10 @@
                                 <button type="button" onclick="location.href='inquiryList.jsp'">취소</button>
                             </div>
                         </form>
+                        <hr style="margin-top: 15px">
+                        <div class="answer_text" style="text-align: left">
+                        <h2>답변 내용</h2>
+                        </div>
                         <hr>
                         <% if(boardDto.getBoard_answer() == null){%>
                         <p></p>

@@ -35,7 +35,7 @@
             height: 180px;
             padding: 30px;
             margin-top: 50px;
-            margin-left: 350px;
+            margin-left: 400px;
             border-radius: 20px;
             box-shadow: 0 7px 25px rgba(0,0,0,0.5);
 
