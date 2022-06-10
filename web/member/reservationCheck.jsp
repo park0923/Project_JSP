@@ -312,7 +312,7 @@
 
         if(elMin>0 && chMin>0){
             alert(elMin+"분 남았습니다.");
-            open(url,'pop01' ,'top=10, left=10, width=800, height=800, status=no, menubar=no, toolbar=no, resizable=no');
+            open(url,'pop01' ,'top=10, left=10, width=600, height=300, status=no, menubar=no, toolbar=no, resizable=no');
         }else if(chMin<0){
             alert("아직 예약이 시작되지않았습니다.");
         }else{
