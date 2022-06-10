@@ -75,7 +75,7 @@
 </head>
 <body>
 
-<div class="topbar" style="margin-left: -300px">
+<div class="topbar">
     <div class="user">
         <ul style="justify-content: left; display: inline-block" class="user_1">
             <li>오늘 정리하는 사람: <%=n%></li>
