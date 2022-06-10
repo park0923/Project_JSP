@@ -321,17 +321,24 @@
                                 <div class="selectStartTime">
                                     <ul class="container">
                                         <li class="item center">
-                                            <h3>수업 시작 날짜</h3>
+                                            <h3 style="width: 140px">수업 시작 날짜</h3>
                                         </li>
                                         <li class="item">
                                             <input type="date" name="sDate" style="padding-right: 26px; width:290px">
+                                        </li>
+                                    </ul>
+                                    <ul class="container">
+                                        <li class="item center">
+                                            <h3 style="width: 140px">수업 종료 날짜</h3>
+                                        </li>
+                                        <li>
                                             <input type="date" name="eDate" style="padding-right: 26px; width:290px">
                                         </li>
                                     </ul>
 
                                     <ul class="container">
                                         <li class="item center">
-                                            <h3>수업 시작</h3>
+                                            <h3 style="width: 140px">수업 시작</h3>
                                         </li>
                                         <li class="item">
                                             <select  name="startTime" onchange="categoryChange(this)"style="padding-right: 26px; width:290px;" >
@@ -353,7 +360,7 @@
 
                                     <ul class="container">
                                         <li class="item center">
-                                            <h3>수업 종료</h3>
+                                            <h3 style="width: 140px">수업 종료</h3>
                                         </li>
                                         <li class="item">
                                             <div class="selectEndTime">
@@ -367,7 +374,7 @@
 
                                     <ul class="container">
                                         <li class="item center">
-                                            <h3>강의실</h3>
+                                            <h3 style="width: 140px">강의실</h3>
                                         </li>
                                         <li class="item">
                                             <div class="selectLectureRoom">
@@ -384,7 +391,7 @@
                                     </ul>
                                     <ul class="container">
                                         <li class="item center">
-                                            <h3>강의 이름</h3>
+                                            <h3 style="width: 140px">강의 이름</h3>
                                         </li>
                                         <li class="item">
                                             <input type="text" name="className" style="width: 290px">
@@ -392,7 +399,7 @@
                                     </ul>
                                     <ul class="container">
                                         <li class="item center">
-                                            <h3>수업 요일</h3>
+                                            <h3 style="width: 140px">수업 요일</h3>
                                         </li>
                                         <li class="item">
                                             <select name="week"style="padding-right: 26px; width:290px;">
@@ -405,7 +412,7 @@
                                             </select>
                                         </li>
                                     </ul>
-                                    <input type="button" class="custom-btn2 btn-2" value="강의등록" onclick="confirmInsert()" >
+                                    <input type="button" class="custom-btn2 btn-2" value="강의등록" style="margin-left: 1px; margin-top: 20px" onclick="confirmInsert()" >
                                 </div>
                             </div>
                         </div>

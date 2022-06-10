@@ -27,6 +27,7 @@
       border-radius: 20px;
       box-shadow: 0 7px 25px rgba(0,0,0,0.5);
       text-align: left;
+      margin-left: 150px;
     }
     .reservationHeader h1{
       font-weight: 600;

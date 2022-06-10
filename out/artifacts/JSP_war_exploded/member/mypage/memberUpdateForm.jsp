@@ -209,8 +209,9 @@
         <div>
           <h1 style="text-align: center">회원정보 수정</h1>
           <hr/>
+          <div class="register" style="padding-left: 40px; margin-top: 100px;">
           <form action="memberUpdateProcess.jsp" method="post" name="modify_form">
-            <div class="register" style="padding-left: 40px; margin-top: 100px;">
+
               <h3 style="margin-bottom: 50px; border-left-width: 0px; margin-left: 0px; padding-top: 50px;">개인정보 수정</h3>
               <div class="flex">
                 <ul class="container">
@@ -267,14 +268,15 @@
                 </ul>
                 <br/>
                 <div class="c">
-                  <input class="custom-btn2 btn-2" style="width: 200px; height: 40px;" type="button" value="수정" onclick="confirmModify()">
+                  <input class="custom-btn2 btn-2" style="width: 200px; height: 40px; margin-left: 25px; margin-top: 15px" type="button" value="수정" onclick="confirmModify()">
                   <input  class="custom-btn2 btn-2" style="width: 200px; height: 40px;" type="button" value="취소" onclick="location.href='../mainForm.jsp'">
                 </div>
               </div>
-            </div>
+
           </form>
-          <button class="custom-btn2 btn-2" style="width: 200px; height: 40px;" onclick="confirmCheck()">아이디 삭제</button>
+          <button class="custom-btn2 btn-2" style="width: 200px; height: 40px; margin-left: 25px; margin-top: 15px" onclick="confirmCheck()">아이디 삭제</button>
           <button class="custom-btn2 btn-2"style="width: 200px; height: 40px;" onclick="changePassWordPopUp()">비밀번호 변경</button>
+          </div>
         </div>
       </div>
     </div>

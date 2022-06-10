@@ -51,6 +51,7 @@
             width: 100%;
             border-collapse: collapse;
             margin-top: 10px;
+            font-size: larger;
         }
         .details table thead td
         {
@@ -112,7 +113,7 @@
                     %>
                     <div onclick="location.href='/member/classInsertForm.jsp'" class="cardName">강의 등록</div>
                     <%
-                        }else{
+                    }else{
                     %>
                     <div onclick="location.href='/member/reservation.jsp'" class="cardName">강의실 예약</div>
                     <%
