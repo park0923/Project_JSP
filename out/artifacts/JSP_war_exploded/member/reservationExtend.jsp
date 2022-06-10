@@ -238,8 +238,9 @@
                         <td>연장 희망 시간</td>
                         <td><input type="number" name="time" min="1" max="<%=timeExtend%>" value="1"></td>
                     </tr>
-                    <input class="custom-btn2 btn-2" style="margin-top: 25px; width: 110px; height: 40px; margin-left: 370px;" type="submit" value="연장하기">
+
                 </table>
+                <input class="custom-btn2 btn-2" style="margin-top: 25px; width: 110px; height: 40px; margin-left: 370px;" type="submit" value="연장하기">
             </form>
         </div>
     </div>
