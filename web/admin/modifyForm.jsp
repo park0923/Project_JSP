@@ -121,6 +121,9 @@
         padding: 10px;
         text-align: center;
     }
+    .details .inquiryBox table td{
+        width: 50%;
+    }
     .details .inquiryBox table tbody tr td:nth-child(6)
     {
         text-align: end;
@@ -128,7 +131,7 @@
 
     input[type=text]{
         size: 100px;
-        width: 100%;
+        width: 50%;
         border: 0;
         text-align: center;
         border:none;
@@ -140,7 +143,7 @@
     }
     input[type=password]{
         size: 100px;
-        width: 100%;
+        width: 50%;
         border: 0;
         text-align: center;
         border:none;
@@ -152,7 +155,7 @@
     }
     input[type=number]{
         size: 100px;
-        width: 100%;
+        width: 50%;
         border: 0;
         text-align: center;
         outline: none;
@@ -259,26 +262,13 @@
                         <tr>
                             <td>State</td>
                             <td>
-                                <select name="state"style="padding-right: 26px; width:100px;" >
-                                    <option><%= user.getState()%></option>
-                                    <%
-                                        if(user.getState().equals("good")){
-                                    %>
-                                    <option>bad</option>
-                                    <%
-                                    }else{
-                                    %>
-                                    <option>good</option>
-                                    <%
-                                        }
-                                    %>
-                                </select>
+                                <input name="state" style="padding-right: 26px; width:100px;" value="<%= user.getState()%>" readonly>
                             </td>
                         </tr>
 
                         <tr>
                             <td>warning</td>
-                            <td><input type="number" name="warning" min="0" max="10" step="1" value="<%= user.getWarning()%>"></td>
+                            <td><input type="number" id="waring" name="warning" min="0" max="10" step="1" value="<%= user.getWarning()%>" onclick="inputValueChange()"></td>
                         </tr>
                     </table>
                     <br/>
@@ -324,6 +314,15 @@
         }
         document.admin_modify_form.submit();
     }
+    function inputValueChange(){
+        var inputValue = document.getElementsByName('warning')[0].value;
+        if(inputValue>=3){
+            document.getElementsByName('state')[0].value = "bad";
+        }else{
+            document.getElementsByName('state')[0].value = "good";
+        }
+
+    };
 </script>
 </body>
 </html>

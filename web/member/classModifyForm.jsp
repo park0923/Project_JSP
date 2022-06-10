@@ -50,6 +50,20 @@
             font-size: xx-large;
             font-weight: bold;
         }
+        .change_btn{
+            padding: 5px 10px;
+            background: var(--blue);
+            color: var(--white);
+            border-radius: 6px;
+            border: solid 0px;
+        }
+        .delete_btn{
+            padding: 5px 10px;
+            background: var(--blue);
+            color: var(--white);
+            border-radius: 6px;
+            border: solid 0px;
+        }
     </style>
 </head>
 <body>
@@ -97,10 +111,10 @@
         </div>
         <div class="contents">
             <div class="details">
-                <div class="reservationCheck">
+                <div class="reservationCheck" style="height: 800px; margin-top: -50px;">
                 <section>
                     <table style="border-spacing: 30px">
-                        <caption>예약 정보</caption>
+                        <caption>강의 정보</caption>
                         <tr>
                             <th>순서</th>
                             <th>강의 이름</th>
@@ -111,6 +125,7 @@
                             <th>강의 시작 날짜</th>
                             <th>예약 종료 날짜</th>
                             <th>수정</th>
+                            <th>삭제</th>
                         </tr>
                         <%
                             if(count > 0){
@@ -126,8 +141,8 @@
                             <td><%=weeks[scheduleDtoList.get(i).getSchedule_week()]%></td>
                             <td><%=scheduleDtoList.get(i).getSchedule_Sdate()%></td>
                             <td><%=scheduleDtoList.get(i).getSchedule_Edate()%></td>
-                            <td><input type="button" value="수정" onclick="PopUp('/member/scheduleUpdateForm.jsp?name=<%=scheduleDtoList.get(i).getSchedule_name()%>&room=<%=scheduleDtoList.get(i).getSchedule_lectureroom_num()%>&sTime=<%=scheduleDtoList.get(i).getSchedule_class_Stime()%>&eTime=<%=scheduleDtoList.get(i).getSchedule_class_Etime()%>&week=<%=scheduleDtoList.get(i).getSchedule_week()%>&sDate=<%=scheduleDtoList.get(i).getSchedule_Sdate()%>&eDate=<%=scheduleDtoList.get(i).getSchedule_Edate()%>')"></td>
-                            <td><input type="button" value="삭제" onclick="location.href='/member/scheduleDeleteProcess.jsp?name=<%=scheduleDtoList.get(i).getSchedule_name()%>&room=<%=scheduleDtoList.get(i).getSchedule_lectureroom_num()%>&sTime=<%=scheduleDtoList.get(i).getSchedule_class_Stime()%>&eTime=<%=scheduleDtoList.get(i).getSchedule_class_Etime()%>&week=<%=scheduleDtoList.get(i).getSchedule_week()%>&sDate=<%=scheduleDtoList.get(i).getSchedule_Sdate()%>&eDate=<%=scheduleDtoList.get(i).getSchedule_Edate()%>'"></td>
+                            <td><input type="button" value="수정" class="change_btn" onclick="PopUp('/member/scheduleUpdateForm.jsp?name=<%=scheduleDtoList.get(i).getSchedule_name()%>&room=<%=scheduleDtoList.get(i).getSchedule_lectureroom_num()%>&sTime=<%=scheduleDtoList.get(i).getSchedule_class_Stime()%>&eTime=<%=scheduleDtoList.get(i).getSchedule_class_Etime()%>&week=<%=scheduleDtoList.get(i).getSchedule_week()%>&sDate=<%=scheduleDtoList.get(i).getSchedule_Sdate()%>&eDate=<%=scheduleDtoList.get(i).getSchedule_Edate()%>')"></td>
+                            <td><input type="button" value="삭제" class="delete_btn" onclick="location.href='/member/scheduleDeleteProcess.jsp?name=<%=scheduleDtoList.get(i).getSchedule_name()%>&room=<%=scheduleDtoList.get(i).getSchedule_lectureroom_num()%>&sTime=<%=scheduleDtoList.get(i).getSchedule_class_Stime()%>&eTime=<%=scheduleDtoList.get(i).getSchedule_class_Etime()%>&week=<%=scheduleDtoList.get(i).getSchedule_week()%>&sDate=<%=scheduleDtoList.get(i).getSchedule_Sdate()%>&eDate=<%=scheduleDtoList.get(i).getSchedule_Edate()%>'"></td>
                         </tr>
                         <%
                                 }
@@ -162,7 +177,7 @@
                                 <%
                                 }else{ // 현재 페이지가 아닌 경우 링크 설정
                                 %>
-                                <a href="classModifyForm.jsp?pageNum=<%=i%>">[<%=i %>]</a>
+                                <a href="classModifyForm.jsp?pageNum=<%=i%>" style="color: black; text-decoration: none">[<%=i %>]</a>
                                 <%
                                         }
                                     } // for end

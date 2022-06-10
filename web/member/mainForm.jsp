@@ -51,6 +51,7 @@
             width: 100%;
             border-collapse: collapse;
             margin-top: 10px;
+            font-size: larger;
         }
         .details table thead td
         {
@@ -112,7 +113,7 @@
                     %>
                     <div onclick="location.href='/member/classInsertForm.jsp'" class="cardName">강의 등록</div>
                     <%
-                        }else{
+                    }else{
                     %>
                     <div onclick="location.href='/member/reservation.jsp'" class="cardName">강의실 예약</div>
                     <%
@@ -156,12 +157,11 @@
                 </div>
                 <div class="inquiryBox">
                     <div class="cardHeader">
-                        <h2>공지사항</h2>
+                        <input type="button" value="View All" onclick="location.href='/member/inquiry/inquiryList.jsp'">
                     </div>
                     <table>
                         <thead>
                         <tr>
-                            <td> 글 번호 </td>
                             <td> 제목 </td>
                             <td> 작성자 </td>
                             <td> 작성일 </td>
@@ -175,7 +175,7 @@
                             for(int i=0; i<boardDtoList.size(); i++){
                         %>
                         <tr>
-                            <td><%=number--%></td>
+
                             <td>
                                 <a class="view" href="inquiry/inquiryview.jsp?id=<%=boardDtoList.get(i).getBoard_index()%>"><%=boardDtoList.get(i).getBoard_title()%></a>
                             </td>
@@ -186,49 +186,49 @@
                         <%
                             }
                         %>
-                        <tr>
-                            <td colspan="8" align="center">
-                                <%
-                                    if(count > 0){
-                                        // 총 페이지의 수
-                                        int pageCount = count / pageSize + (count%pageSize == 0 ? 0 : 1);
-                                        // 한 페이지에 보여줄 페이지 블럭(링크) 수
-                                        int pageBlock = 10;
-                                        // 한 페이지에 보여줄 시작 및 끝 번호(예 : 1, 2, 3 ~ 10 / 11, 12, 13 ~ 20)
-                                        int startPage = ((currentPage-1)/pageBlock)*pageBlock+1;
-                                        int endPage = startPage + pageBlock - 1;
+<%--                        <tr>--%>
+<%--                            <td colspan="8" align="center">--%>
+<%--                                <%--%>
+<%--                                    if(count > 0){--%>
+<%--                                        // 총 페이지의 수--%>
+<%--                                        int pageCount = count / pageSize + (count%pageSize == 0 ? 0 : 1);--%>
+<%--                                        // 한 페이지에 보여줄 페이지 블럭(링크) 수--%>
+<%--                                        int pageBlock = 10;--%>
+<%--                                        // 한 페이지에 보여줄 시작 및 끝 번호(예 : 1, 2, 3 ~ 10 / 11, 12, 13 ~ 20)--%>
+<%--                                        int startPage = ((currentPage-1)/pageBlock)*pageBlock+1;--%>
+<%--                                        int endPage = startPage + pageBlock - 1;--%>
 
-                                        // 마지막 페이지가 총 페이지 수 보다 크면 endPage를 pageCount로 할당
-                                        if(endPage > pageCount){
-                                            endPage = pageCount;
-                                        }
+<%--                                        // 마지막 페이지가 총 페이지 수 보다 크면 endPage를 pageCount로 할당--%>
+<%--                                        if(endPage > pageCount){--%>
+<%--                                            endPage = pageCount;--%>
+<%--                                        }--%>
 
-                                        if(startPage > pageBlock){
-                                %>
-                                <a href="mainForm.jsp?pageNum=<%=startPage - 10%>">[이전]</a>
-                                <%
-                                    }
+<%--                                        if(startPage > pageBlock){--%>
+<%--                                %>--%>
+<%--                                <a href="mainForm.jsp?pageNum=<%=startPage - 10%>">[이전]</a>--%>
+<%--                                <%--%>
+<%--                                    }--%>
 
-                                    for(int i=startPage; i <= endPage; i++){ // 페이지 블록 번호
-                                        if(i == currentPage){ // 현재 페이지에는 링크를 설정하지 않음
-                                %>
-                                <%=i %>
-                                <%
-                                }else{ // 현재 페이지가 아닌 경우 링크 설정
-                                %>
-                                <a href="mainForm.jsp?pageNum=<%=i%>">[<%=i %>]</a>
-                                <%
-                                        }
-                                    } // for end
-                                    if(endPage < pageCount){ // 현재 블록의 마지막 페이지보다 페이지 전체 블록수가 클경우 다음 링크 생성
-                                %>
-                                <a href="mainForm.jsp?pageNum=<%=startPage + 10 %>">[다음]</a>
-                                <%
-                                        }
-                                    }
-                                %>
-                            </td>
-                        </tr>
+<%--                                    for(int i=startPage; i <= endPage; i++){ // 페이지 블록 번호--%>
+<%--                                        if(i == currentPage){ // 현재 페이지에는 링크를 설정하지 않음--%>
+<%--                                %>--%>
+<%--                                <%=i %>--%>
+<%--                                <%--%>
+<%--                                }else{ // 현재 페이지가 아닌 경우 링크 설정--%>
+<%--                                %>--%>
+<%--                                <a href="mainForm.jsp?pageNum=<%=i%>">[<%=i %>]</a>--%>
+<%--                                <%--%>
+<%--                                        }--%>
+<%--                                    } // for end--%>
+<%--                                    if(endPage < pageCount){ // 현재 블록의 마지막 페이지보다 페이지 전체 블록수가 클경우 다음 링크 생성--%>
+<%--                                %>--%>
+<%--                                <a href="mainForm.jsp?pageNum=<%=startPage + 10 %>">[다음]</a>--%>
+<%--                                <%--%>
+<%--                                        }--%>
+<%--                                    }--%>
+<%--                                %>--%>
+<%--                            </td>--%>
+<%--                        </tr>--%>
                         </tbody>
                     </table>
                 </div>

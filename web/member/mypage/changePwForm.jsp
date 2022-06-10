@@ -229,7 +229,7 @@
 
       </table>
       <div style="margin-top: 30px">
-        <input class="custom-btn2 btn-2" style="width: 200px; height: 40px;" type="button" value="변경" onclick="confirmChange(this)" >
+        <input class="custom-btn2 btn-2" style="width: 200px; height: 40px; margin-left: 25px" type="button" value="변경" onclick="confirmChange(this)" >
         <input class="custom-btn2 btn-2" style="width: 200px; height: 40px;" type="button" onclick="window.close()" value="취소">
       </div>
     </div>
