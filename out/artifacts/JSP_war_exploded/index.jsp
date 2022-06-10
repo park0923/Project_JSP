@@ -149,7 +149,7 @@
     <a href="index.jsp" class="logo">컴퓨터소프트웨어공학전공</a>
   </div>
   <ul>
-    <li><a href="/home/joinform.jsp">Sing Up</a></li>
+    <li><a href="/home/joinform.jsp">Sign Up</a></li>
     <li><a href="/home/loginForm.jsp">Log In</a></li>
   </ul>
 </header>
