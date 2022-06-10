@@ -69,7 +69,7 @@
                 <script>
                     var con = confirm("다음 강의실 쓰겠습니까?");
                     if(con){
-                        location.href='/member/reservation/seatSelection.jsp?roomNum=911date=<%=request.getParameter("date")%>&sTime=<%=request.getParameter("startTime")%>&eTime=<%=request.getParameter("endTime")%>&person=<%=request.getParameter("person")%>';
+                        location.href='/member/reservation/seatSelection.jsp?roomNum=911&date=<%=request.getParameter("date")%>&sTime=<%=request.getParameter("startTime")%>&eTime=<%=request.getParameter("endTime")%>&person=<%=request.getParameter("person")%>';
                     }else {
                         location.href='/member/reservation/seatSelection.jsp?roomNum=918&date=<%=request.getParameter("date")%>&sTime=<%=request.getParameter("startTime")%>&eTime=<%=request.getParameter("endTime")%>&person=<%=request.getParameter("person")%>';
                     }

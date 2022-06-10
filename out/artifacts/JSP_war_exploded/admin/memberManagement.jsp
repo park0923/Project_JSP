@@ -255,7 +255,7 @@
                     </tr>
                 </table>
                 </div>
-                <button class="custom-btn2 btn-2" style="height: 50px; margin-top: 40px; margin-right: 100px" onclick="location.href='../home/joinform.jsp'" >회원 추가</button>
+                <button class="custom-btn2 btn-2" style="height: 50px; margin-top: 40px; margin-right: 100px" onclick="location.href='./adminMember.jsp'" >회원 추가</button>
             </div>
         </div>
     </div>

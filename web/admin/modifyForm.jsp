@@ -262,7 +262,7 @@
                         <tr>
                             <td>State</td>
                             <td>
-                                <input name="state" style="padding-right: 26px; width:100px;" value="<%= user.getState()%>" readonly>
+                                <input type="text" name="state" style="padding-right: 26px; width:100px;" value="<%= user.getState()%>" readonly>
                             </td>
                         </tr>
 

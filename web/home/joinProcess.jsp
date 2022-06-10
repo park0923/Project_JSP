@@ -26,7 +26,7 @@
 %>
 <script>
     alert("회원가입을 성공 했습니다.");
-    location.href = history.back();
+    location.href = history.go(-2);
 </script>
 <%
 }else{
