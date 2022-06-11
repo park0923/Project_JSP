@@ -17,11 +17,10 @@
     <style>
         .details .reservationCheck{
             position: relative;
-            width: 1300px;
+            width: 1270px;
             height: 700px;
             padding: 30px;
             margin-top: -30px;
-            margin-left: 50px;
             border-radius: 20px;
             box-shadow: 0 7px 25px rgba(0,0,0,0.5);
         }
@@ -31,7 +30,6 @@
             font-size: 0.9em;
             text-align: center;
             width: 1200px;
-            margin-left: 20px;
         }
         th, td{
             border: 1px solid #d2d2d2;

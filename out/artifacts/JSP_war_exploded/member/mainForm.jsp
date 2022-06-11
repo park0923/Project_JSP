@@ -73,6 +73,13 @@
             text-decoration: none;
             color:  var(--black1);
         }
+        .main_btn{
+            padding: 5px 10px;
+            background: var(--blue);
+            color: var(--white);
+            border-radius: 6px;
+            border: solid 0px;
+        }
     </style>
 </head>
 <body>
@@ -157,7 +164,7 @@
                 </div>
                 <div class="inquiryBox">
                     <div class="cardHeader">
-                        <input type="button" value="View All" onclick="location.href='/member/inquiry/inquiryList.jsp'">
+                        <input type="button" value="View All" onclick="location.href='/member/inquiry/inquiryList.jsp'" class="main_btn">
                     </div>
                     <table>
                         <thead>

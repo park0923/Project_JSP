@@ -90,12 +90,14 @@
         width: 100%;
         border-collapse: collapse;
         margin-top: 10px;
+
     }
     .details .inquiryBox table thead td
     {
         font-weight: 600;
         text-align: center;
     }
+
     .details .inquiryBox table tr
     {
         color: var(--black1);
@@ -215,34 +217,34 @@
                 <form action="modifyProcess.jsp" method="post" name="admin_modify_form">
                     <table>
                         <tr>
-                            <td>ID</td>
-                            <td><input type="text" name="id" value="<%= user.getId()%>" ></td>
+                            <td style="width: 70%">ID</td>
+                            <td style="width: 30%; text-align: left"><input type="text" name="id" value="<%= user.getId()%>"></td>
                         </tr>
 
                         <tr>
                             <td>Password</td>
-                            <td><input type="password" name="pw" value="<%=user.getPw()%>"></td>
+                            <td style="text-align: left"><input type="password" name="pw" value="<%=user.getPw()%>"></td>
                         </tr>
 
                         <tr>
                             <td>이름</td>
-                            <td><input type="text" name="name" value="<%= user.getName()%>"></td>
+                            <td style="text-align: left"><input type="text" name="name" value="<%= user.getName()%>"></td>
                         </tr>
 
                         <tr>
                             <td>Phone</td>
-                            <td><input type="text" name="phone" value="<%= user.getPhone()%>"></td>
+                            <td style="text-align: left"><input type="text" name="phone" value="<%= user.getPhone()%>"></td>
                         </tr>
 
                         <tr>
                             <td>Email</td>
-                            <td><input type="text" name="email" value="<%= user.getEmail()%>"></td>
+                            <td style="text-align: left"><input type="text" name="email" value="<%= user.getEmail()%>"></td>
                         </tr>
 
                         <tr>
                             <td>Position</td>
-                            <td>
-                                <select  name="position"style="padding-right: 26px; width:100px;" >
+                            <td style="text-align: left">
+                                <select  name="position"style="padding-right: 26px; width:100px; margin-left: 25px" >
                                     <option><%= user.getPosition()%></option>
                                     <%
                                         if(user.getPosition().equals("admin")){
@@ -261,14 +263,14 @@
 
                         <tr>
                             <td>State</td>
-                            <td>
-                                <input type="text" name="state" style="padding-right: 26px; width:100px;" value="<%= user.getState()%>" readonly>
+                            <td style="text-align: left">
+                                <input type="text" name="state" style="width:100px; margin-left: 25px" value="<%= user.getState()%>" readonly>
                             </td>
                         </tr>
 
                         <tr>
                             <td>warning</td>
-                            <td><input type="number" id="waring" name="warning" min="0" max="10" step="1" value="<%= user.getWarning()%>" onclick="inputValueChange()"></td>
+                            <td style="text-align: left"><input type="number" id="waring" name="warning" min="0" max="10" step="1" value="<%= user.getWarning()%>" onclick="inputValueChange()"></td>
                         </tr>
                     </table>
                     <br/>
