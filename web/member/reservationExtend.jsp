@@ -145,8 +145,9 @@
         }
 
         .custom-btn2 {
+            margin-top: 10px;
             width: 160px;
-            height: 50px;
+            height: 40px;
             color: #fff;
             border-radius: 5px;
             padding: 10px 5px;
@@ -224,10 +225,10 @@
 %>
 <div class="contents">
     <div class="details">
-        <h1 style="text-align: center">예약 연장</h1>
-        <hr/>
 
         <div class="inquiryBox">
+            <h1 style="text-align: center">예약 연장</h1>
+            <hr/>
             <form action="reservationExtendProcess.jsp?seat=<%=seat%>&date=<%=date%>&room=<%=room%>&sTime=<%=sTime%>&eTime=<%=eTime%>" method="post">
                 <table>
                     <tr>
@@ -239,7 +240,7 @@
                         <td><input type="number" name="time" min="1" max="<%=timeExtend%>" value="1"></td>
                     </tr>
                 </table>
-                <input class="custom-btn2 btn-2" style="margin-top: 25px; width: 110px; height: 40px; margin-left: 370px;" type="submit" value="연장하기">
+                <input class="custom-btn2 btn-2" style="margin-left: 200px;" type="submit" value="연장하기">
             </form>
         </div>
     </div>
