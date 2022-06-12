@@ -16,6 +16,7 @@
     {
         position: relative;
         width: 100%;
+        height: 300%;
         padding: 20px;
         display: flex;
         flex-direction: column;
@@ -115,7 +116,7 @@
     }
     .details .inquiryBox table tbody tr td:nth-child(6)
     {
-        text-align: end;
+        text-align: center;
     }
 
     input[type=text]{
@@ -159,7 +160,6 @@
     .register{
         width: 550px;
         height: 500px;
-        margin-left: 400px;
         margin-top: 100px;
         margin-bottom: 100px;
         padding: 15px 15px;
@@ -167,6 +167,8 @@
         color: #2b2e4a;
         font-size: 14px;
         text-align: left;
+        display: inline-block;
+        margin-right: 500px;
     }
     .register h3{
         font-size: 20px;
@@ -402,6 +404,23 @@
                                 <div class="selectStartTime">
                                     <ul class="container">
                                         <li class="item center">
+                                            <h3 style="width: 140px">강의실</h3>
+                                        </li>
+                                        <li class="item">
+                                            <div class="selectLectureRoom">
+
+                                                <select id="Room" name="lectureRoom"style="padding-right: 26px; width:290px;" onChange="change(this.options[this.selectedIndex].value)">
+                                                    <option value="0">강의실 선택</option>
+                                                    <option value="915">915</option>
+                                                    <option value="916">916</option>
+                                                    <option value="918">918</option>
+                                                    <option value="911">911</option>
+                                                </select>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <ul class="container">
+                                        <li class="item center">
                                             <h3 style="width: 140px">수업 시작 날짜</h3>
                                         </li>
                                         <li class="item">
@@ -453,23 +472,7 @@
                                         </li>
                                     </ul>
 
-                                    <ul class="container">
-                                        <li class="item center">
-                                            <h3 style="width: 140px">강의실</h3>
-                                        </li>
-                                        <li class="item">
-                                            <div class="selectLectureRoom">
 
-                                                <select id="Room" name="lectureRoom"style="padding-right: 26px; width:290px;">
-                                                    <option value="0">강의실 선택</option>
-                                                    <option value="915">915</option>
-                                                    <option value="916">916</option>
-                                                    <option value="918">918</option>
-                                                    <option value="911">911</option>
-                                                </select>
-                                            </div>
-                                        </li>
-                                    </ul>
                                     <ul class="container">
                                         <li class="item center">
                                             <h3 style="width: 140px">강의 이름</h3>
@@ -492,13 +495,16 @@
                                                 <option value="6">금</option>
                                             </select>
                                         </li>
-                                        <div style="display: flex; flex-direction: row">
-                                            <select onChange="change(this.options[this.selectedIndex].value)" style="margin-right: 20px; display: inline-block; height: 20px" >
-                                                <option value="selectBox01" selected>915</option>
-                                                <option value="selectBox02">916</option>
-                                                <option value="selectBox03">918</option>
-                                                <option value="selectBox04">911</option>
-                                            </select>
+                                    </ul>
+                                    <input type="button" class="custom-btn2 btn-2" value="강의등록" style="margin-left: 1px; margin-top: 20px; width: 85%" onclick="confirmInsert()" >
+
+                                    <div style="display: inline-block; flex-direction: row; position: relative; left: 500px; top: -470px; width: 500px">
+<%--                                            <select style="margin-right: 20px; display: inline-block; height: 20px" >--%>
+<%--                                                <option value="selectBox01" selected>915</option>--%>
+<%--                                                <option value="selectBox02">916</option>--%>
+<%--                                                <option value="selectBox03">918</option>--%>
+<%--                                                <option value="selectBox04">911</option>--%>
+<%--                                            </select>--%>
                                             <table id="view1" style="border: solid 0px" >
                                                 <tr>
                                                     <td></td><td>월</td><td>화</td><td>수</td><td>목</td><td>금</td>
@@ -576,8 +582,7 @@
                                                 %>
                                             </table>
                                         </div>
-                                    </ul>
-                                    <input type="button" class="custom-btn2 btn-2" value="강의등록" style="margin-left: 1px; margin-top: 20px" onclick="confirmInsert()" >
+
                                 </div>
                             </div>
                         </div>
@@ -672,28 +677,28 @@
     }
     function change(style) {
 
-        if( style == "selectBox01" )
+        if( style == "915" )
         {
             view1.style.display = "inline"
             view2.style.display = "none"
             view3.style.display = "none"
             view4.style.display = "none"
         }
-        if( style == "selectBox02" )
+        if( style == "916" )
         {
             view1.style.display = "none"
             view2.style.display = "inline"
             view3.style.display = "none"
             view4.style.display = "none"
         }
-        if( style == "selectBox03" )
+        if( style == "918" )
         {
             view1.style.display = "none"
             view2.style.display = "none"
             view3.style.display = "inline"
             view4.style.display = "none"
         }
-        if( style == "selectBox04")
+        if( style == "911")
         {
             view1.style.display = "none"
             view2.style.display = "none"

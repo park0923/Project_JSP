@@ -51,7 +51,7 @@
         {
             display: flex;
             padding-right: 15px;
-            font-size: 20px;
+            font-size: 18px;
             justify-content: center;
             align-items: center;
         }
@@ -66,7 +66,7 @@
             text-decoration: none;
         }
         .user_1{
-            margin-right: 850px;
+            margin-right: 400px;
         }
         .user{
             margin-top: 10px ;
@@ -80,7 +80,7 @@
         <ul style="justify-content: left; display: inline-block" class="user_1">
             <li>오늘 정리하는 사람: <%=n%></li>
         </ul>
-        <ul style="justify-content: right; display: inline-block" class="user_2">
+        <ul style="justify-content: right; display: inline-block; margin-left: 430px" class="user_2">
             <li> <%=session.getAttribute("id")%></li>
         </ul>
         <ul style="justify-content: right; display: inline-block" class="user_3">
