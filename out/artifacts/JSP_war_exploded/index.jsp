@@ -114,37 +114,30 @@
       position: relative;
       width: 30%;
       height: 100%;
+      display: flex;
+      margin: 10px;
+      min-width: 500px;
+      flex-direction: column;
       justify-content: start;
       align-items: start;
     }
     .container .middle_title h1
     {
-      position: relative;
       margin-bottom: 4px;
       color: white;
-      font-size: 200%;
-      overflow: hidden;
-      text-overflow: clip;
-      white-space: nowrap;
+      min-width: 200px;
     }
     .container .middle_title h3
     {
-      position: relative;
       margin-bottom: 50px;
       color: white;
-      font-size: 100%;
-      overflow: hidden;
-      text-overflow: clip;
-      white-space: nowrap;
+      min-width: 200px;
     }
     .container .middle_title p
     {
-      position: relative;
-      font-size: 200%;
+      font-size: 30px;
       color: white;
-      overflow: hidden;
-      text-overflow: clip;
-      white-space: nowrap;
+      min-width: 200px;
     }
 
   </style>
