@@ -12,6 +12,7 @@
     String id = (String) session.getAttribute("id");
     int rt = dao.deleteId(id);
     if(rt == UserDao.USER_DELETE_SUCCESS){
+        session.invalidate();
 %>
 <script>
     alert("삭제되었습니다.")
