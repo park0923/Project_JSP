@@ -10,6 +10,112 @@
 <head>
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="../navigation.css">
+    <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        form
+        {
+            position: relative;
+            width: 100%;
+        }
+        .container h3
+        {
+            color: #000000;
+            font-weight: 600;
+            font-size: 2em;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .inputbox
+        {
+            position: relative;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .inputbox span
+        {
+            display: inline-block;
+            color: black;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.75em;
+            border-left: 4px solid black;
+            padding-left: 4px;
+            line-height: 1em;
+        }
+        .inputbox .box
+        {
+            display: flex;
+            justify-content: center;
+        }
+        .inputbox .box .icon
+        {
+            position: relative;
+            min-width: 40px;
+            height: 40px;
+            background: #4682B4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-size: 1.15em;
+            box-shadow: 5px 5px 7px rgba(0,0,0,0.2);
+        }
+        .inputbox .box input
+        {
+            position: relative;
+            width: 50%;
+            border: none;
+            outline: black;
+            padding: 10px 10px;
+            border-radius: 30px;
+            box-shadow: 5px 5px 7px rgba(0,0,0,0.2);
+        }
+        .inputbox .box input[type="submit"]
+        {
+            background: lightskyblue;
+            border-radius: 30px;
+            box-shadow: 5px 5px 7px rgba(0,0,0,0.2);
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin-top: 10px;
+            width: 25%;
+            margin-right: 40px;
+        }
+        .inputbox .box input[type="submit"]:hover
+        {
+            color: #4682B4;
+        }
+        .inputbox .box input[type="button"]
+        {
+            background: lightskyblue;
+            border-radius: 30px;
+            box-shadow: 5px 5px 7px rgba(0,0,0,0.2);
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin-top: 10px;
+            width: 25%;
+        }
+        .inputbox .box input[type="button"]:hover
+        {
+            color: #4682B4;
+        }
+    </style>
 </head>
 <link rel="stylesheet" type="text/css" href="/member/main.css">
 <body>
