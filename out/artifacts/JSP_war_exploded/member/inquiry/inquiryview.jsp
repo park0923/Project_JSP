@@ -170,55 +170,13 @@
 </head>
 <body>
 <div class="container">
-    <div class="navigation">
-        <ul>
-            <li class="list">
-                <a href="/member/mainForm.jsp">
-                    <img src="../../images/symbol.png" class="symbol" />
-                    <span class="title">컴퓨터소프트웨어공학과</span>
-                </a>
-            </li>
-            <li class="list">
-                <a href="/member/mypage.jsp">
-                    <span class="icon"><ion-icon name="person"></ion-icon></span>
-                    <span class="title">마이페이지</span>
-                </a>
-            </li>
-            <li class="list">
-                <a href="/reservation/reservation.jsp">
-                    <span class="icon"><ion-icon name="today"></ion-icon></span>
-                    <span class="title">강의실 예약</span>
-                </a>
-            </li>
-            <li class="list">
-                <a href="/reservation/reservationcheck.jsp">
-                    <span class="icon"><ion-icon name="search"></ion-icon></span>
-                    <span class="title">예약 조회</span>
-                </a>
-            </li>
-            <li class="list">
-                <a href="/member/classroominquiry.jsp">
-                    <span class="icon"><ion-icon name="calendar-clear"></ion-icon></span>
-                    <span class="title">강의실 조회</span>
-                </a>
-            </li>
-            <li class="list actives">
-                <a href="/member/inquiry/inquiryList.jsp">
-                    <span class="icon"><ion-icon name="chatbox-ellipses"></ion-icon></span>
-                    <span class="title">문의하기</span>
-                </a>
-            </li>
-        </ul>
+    <div class="nav">
+        <%@ include file="../../navigation.jsp" %>
     </div>
     <%request.setCharacterEncoding("utf-8");%>
     <div class="main">
-        <div class="topbar">
-            <div class="user">
-                <ul>
-                    <li> <%=session.getAttribute("name")%></li>
-                    <li><a href="../../home/logout.jsp">로그아웃</a></li>
-                </ul>
-            </div>
+        <div class="header">
+            <%@ include file="../../header.jsp" %>
         </div>
 
         <div class="details">
@@ -252,7 +210,14 @@
                         </div>
                     </div>
                     <hr>
-                    <p><%=boardDto.getBoard_inquiry()%></p>
+                    <%
+                        String[] str = boardDto.getBoard_inquiry().split("\n");
+                        for (int i = 0; i < str.length; i++){
+                    %>
+                        <p><%=str[i]%></p>
+                    <%
+                        }
+                    %>
                     <hr>
                     <%
                         if (udao.getPosition((String) session.getAttribute("id")).equals("admin")){
