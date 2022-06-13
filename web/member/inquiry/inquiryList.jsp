@@ -156,7 +156,7 @@
         }else {
         %>
             <script>
-                alert("예약이 없습니다.")
+                alert("문의가 없습니다.")
                 history.back();
             </script>
         <%

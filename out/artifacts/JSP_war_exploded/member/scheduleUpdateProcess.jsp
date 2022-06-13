@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
+    request.setCharacterEncoding("utf-8");
     String name = request.getParameter("name");
     String room = request.getParameter("room");
     String sTime = request.getParameter("sTime");
