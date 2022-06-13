@@ -7,7 +7,7 @@ import java.sql.*;
 public class DatabaseUtil {
     public static Connection getConnection(){
         try {
-            String dbURL = "jdbc:mysql://34.64.94.158:3306/jspdb?serverTimezone=UTC";
+            String dbURL = "jdbc:mysql://34.64.94.158:46892/jspdb?serverTimezone=UTC";
             String dbID = "root";
             String dbPW = "rootpassword";
             Class.forName("com.mysql.jdbc.Driver");
