@@ -300,6 +300,7 @@
     </style>
 </head>
 <%
+    request.setCharacterEncoding("utf-8");
     ScheduleDao dao = ScheduleDao.getInstance();
     String name = request.getParameter("name");
     String room = request.getParameter("room");

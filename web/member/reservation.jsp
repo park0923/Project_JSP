@@ -111,6 +111,7 @@
   Date date = new Date();
   SimpleDateFormat simpleDate = new SimpleDateFormat("HHmm");
   String strTime = simpleDate.format(date);
+  System.out.println(strTime);
   if (session.getAttribute("isLogin") == null) {
 %>
 <script>
@@ -118,10 +119,10 @@
   location.href = "loginForm.jsp";
 </script>
 <%
-}else if(Integer.parseInt(strTime)>24430){
+}else if(Integer.parseInt(strTime)>1630){
 %>
 <script>
-  alert("예약 가능시간이 끝났습니다.");
+  alert("예약 가능시간이 끝났습니다. 예약은 16시 30분까지입니다.");
   location.href = "mainForm.jsp";
 </script>
 <%
